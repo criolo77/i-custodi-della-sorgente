@@ -577,6 +577,16 @@ h1, h2, h3, h4 {
 .founder-info h3 a { transition: color .3s ease; }
 .founder-info h3 a:hover { color: var(--brick); }
 
+.founder-role {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: .82rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-top: .25rem;
+}
+
 .btn-founder {
   display: inline-flex;
   align-items: center;
