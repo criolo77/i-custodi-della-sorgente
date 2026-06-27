@@ -457,6 +457,123 @@ h1, h2, h3, h4 {
 .stat .num   { font-family: var(--ff-display); font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--bordeaux-700); }
 .stat .label { font-size: .78rem; color: var(--ink-soft); letter-spacing: .03em; }
 
+/* ---------- LA NOSTRA VISIONE ---------- */
+.vision-section {
+  background: var(--cream);
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.vision-header {
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.vision-title {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  color: var(--bordeaux-900);
+  margin-top: .6rem;
+  line-height: 1.12;
+}
+
+/* Citazione */
+.vision-quote {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  padding-block: 0;
+  border: none;
+  margin-bottom: clamp(5rem, 10vw, 8rem);
+}
+.vision-quote p {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  line-height: 1.65;
+  color: var(--bordeaux-700);
+  letter-spacing: .01em;
+}
+
+/* Testo introduttivo */
+.vision-intro {
+  max-width: 600px;
+  margin-bottom: clamp(5rem, 10vw, 8rem);
+}
+.vision-intro p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: var(--ink-soft);
+  margin-top: 1.3rem;
+}
+.vision-intro p:first-child { margin-top: 0; }
+.vision-intro em {
+  font-style: italic;
+  color: var(--bordeaux-700);
+}
+
+/* Pilastri */
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pillar {
+  display: grid;
+  grid-template-columns: 220px 1px 1fr;
+  gap: 0 clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+  padding-block: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.pillar:last-child { border-bottom: 1px solid var(--line); }
+
+.pillar-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  color: var(--bordeaux-900);
+  line-height: 1.25;
+  padding-top: .1rem;
+  text-align: right;
+}
+
+.pillar-line {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: var(--gold-deep);
+  opacity: .55;
+  align-self: stretch;
+}
+
+.pillar-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  padding-top: .1rem;
+}
+
+/* Responsive pilastri */
+@media (max-width: 760px) {
+  .pillar {
+    grid-template-columns: 1fr;
+    gap: 1.1rem 0;
+  }
+  .pillar-title { text-align: left; }
+  .pillar-line {
+    width: 36px;
+    height: 1.5px;
+    background: var(--gold-deep);
+    align-self: auto;
+  }
+}
+
 /* ---------- FONDATORI ---------- */
 .founders-section { background: var(--white); }
 
