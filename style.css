@@ -651,6 +651,10 @@ h1, h2, h3, h4 {
   object-position: center top;
   transition: transform .55s ease, opacity .55s ease;
 }
+/* Melissa: volto nella metà sinistra della foto, centrato orizzontalmente */
+.founder-card:nth-child(2) .founder-img-wrap img {
+  object-position: 38% top;
+}
 .founder-card:hover .founder-img-wrap img {
   transform: scale(1.04);
   opacity: .88;
