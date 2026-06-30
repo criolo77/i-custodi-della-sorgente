@@ -1174,6 +1174,64 @@ footer {
   margin-bottom: .4rem;
 }
 
+/* --- Lettura "da libro": testo più largo, margini ampi, ritmo lento ---
+     usata solo dove richiesto (es. pagina Maria Gorette), senza alterare
+     lo stile base .profile-bio già in uso altrove --- */
+.profile-bio-narrow {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.profile-bio-narrow p {
+  font-size: 1.08rem;
+  line-height: 2;
+  margin-top: 2.1rem;
+}
+.profile-bio-narrow p:first-child { margin-top: 0; }
+
+/* --- Citazione iniziale dorata (sotto il titolo, prima della biografia) --- */
+.profile-opening-quote-section {
+  background: var(--cream);
+  padding-block: clamp(1rem, 3vw, 2rem) clamp(4.5rem, 9vw, 7rem);
+}
+.profile-opening-quote {
+  max-width: 700px;
+  margin-inline: auto;
+  text-align: center;
+  border: none;
+  padding: 0;
+}
+.profile-opening-quote p {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+  line-height: 1.7;
+  color: var(--gold-deep);
+  letter-spacing: .01em;
+}
+
+/* --- Citazione finale dorata (a chiusura pagina) --- */
+.profile-closing-quote-section {
+  background: var(--white);
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+.profile-closing-quote {
+  max-width: 660px;
+  margin-inline: auto;
+  text-align: center;
+  border: none;
+  padding: 0;
+}
+.profile-closing-quote p {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.75;
+  color: var(--gold-deep);
+  letter-spacing: .01em;
+}
+
 /* --- Sezione "Continua il viaggio" --- */
 .profile-others { background: var(--cream); }
 .section-heading.center { margin-inline: auto; text-align: center; }
@@ -1195,4 +1253,7 @@ footer {
 @media (max-width: 640px) {
   .profile-others-grid { grid-template-columns: 1fr; max-width: 380px; }
   .profile-portrait-img-box { width: min(320px, 88vw); }
+}
+@media (max-width: 760px) {
+  .profile-bio-narrow { max-width: 100%; }
 }
