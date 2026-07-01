@@ -1257,3 +1257,105 @@ footer {
 @media (max-width: 760px) {
   .profile-bio-narrow { max-width: 100%; }
 }
+
+/* ============================================================
+   MODALE CONTATTI
+   ============================================================ */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+.contact-modal[hidden] { display: none; }
+
+.contact-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 9, 15, .72);
+  backdrop-filter: blur(4px);
+  animation: fadeIn .35s ease;
+}
+
+.contact-modal-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--cream);
+  border-radius: 6px;
+  width: min(620px, 100%);
+  max-height: 90svh;
+  overflow-y: auto;
+  padding: clamp(1.8rem, 5vw, 3rem);
+  box-shadow: 0 32px 80px -16px rgba(40, 9, 15, .55);
+  animation: modalIn .4s cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(28px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .3s ease, border-color .3s ease;
+}
+.contact-modal-close svg { width: 16px; height: 16px; stroke: var(--ink-soft); }
+.contact-modal-close:hover { background: var(--bordeaux-700); border-color: var(--bordeaux-700); }
+.contact-modal-close:hover svg { stroke: var(--cream); }
+
+.contact-modal-header { margin-bottom: 1.8rem; }
+.contact-modal-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-top: .5rem;
+}
+.contact-modal-sub { color: var(--ink-soft); margin-top: .4rem; font-size: .95rem; }
+
+/* form inside modal: no extra card shadow (panel already has it) */
+.contact-modal-form {
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* lock body scroll when modal open */
+body.modal-open { overflow: hidden; }
+
+/* nav button che apre la modale: stesso aspetto dei link nav */
+.nav-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--ff-body);
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--cream);
+  cursor: pointer;
+  position: relative;
+  padding-block: .3rem;
+}
+.nav-link-btn::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1.5px;
+  background: var(--gold);
+  transition: width .35s ease;
+}
+.nav-link-btn:hover::after,
+.nav-link-btn:focus-visible::after { width: 100%; }

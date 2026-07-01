@@ -141,11 +141,56 @@
       }
       success.classList.add("show");
       form.reset();
-      success.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "center"
-      });
       setTimeout(function () { success.classList.remove("show"); }, 6000);
+    });
+  }
+
+  /* ---- modale contatti ---- */
+  var modal      = document.getElementById("contactModal");
+  var ctaBtn     = document.getElementById("ctaOpenModal");
+  var closeBtn   = document.getElementById("modalClose");
+  var backdrop   = document.getElementById("modalBackdrop");
+  var firstFocus = null;
+
+  function openModal() {
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    // find first focusable element
+    firstFocus = modal.querySelector("input, select, textarea, button:not(#modalClose)");
+    if (firstFocus) firstFocus.focus();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+    if (ctaBtn) ctaBtn.focus();
+  }
+
+  if (ctaBtn)   ctaBtn.addEventListener("click", openModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+
+  // close on Escape
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal && !modal.hidden) closeModal();
+  });
+
+  // trap focus inside modal
+  if (modal) {
+    modal.addEventListener("keydown", function (e) {
+      if (e.key !== "Tab") return;
+      var focusable = Array.prototype.slice.call(
+        modal.querySelectorAll('button, input, select, textarea, [href], [tabindex]:not([tabindex="-1"])')
+      ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
   }
 

@@ -37,8 +37,8 @@
       <a href="#percorsi">Percorsi</a>
       <a href="#eventi">Seminari</a>
       <a href="#testimonianze">Testimonianze</a>
-      <a href="#contatti">Contatti</a>
-      <a href="#contatti" class="btn btn-gold">Iscriviti</a>
+      <button class="nav-link-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button>
+      <button class="btn btn-gold" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
     </nav>
 
     <button class="nav-toggle" id="navToggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="navMobile">
@@ -53,7 +53,7 @@
   <a href="#percorsi">Percorsi</a>
   <a href="#eventi">Seminari</a>
   <a href="#testimonianze">Testimonianze</a>
-  <a href="#contatti">Contatti</a>
+  <button class="nav-link-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button>
 </nav>
 
 <main id="main">
@@ -77,7 +77,7 @@
           <path d="M5 12h14M13 6l6 6-6 6"/>
         </svg>
       </a>
-      <a href="#contatti" class="btn btn-outline-light">Iscriviti a un seminario</a>
+      <button class="btn btn-outline-light" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti a un seminario</button>
     </div>
   </div>
 
@@ -310,80 +310,46 @@
 <section class="section" id="percorsi">
   <div class="container">
     <div class="section-head center reveal">
-      <h2>Discipline per corpo, mente e respiro</h2>
-      <p>Ogni percorso nasce da pratiche autentiche, insegnate da professionisti con anni di esperienza sul campo.</p>
+      <h2>I nostri Percorsi</h2>
+      <p>Ogni percorso nasce dall'incontro tra esperienza, ricerca interiore e pratica quotidiana. I seminari e i trattamenti vengono proposti nelle sedi di Monopoli e Milano, secondo le competenze dei singoli Custodi della Sorgente.</p>
     </div>
 
     <div class="services-grid reveal-stagger">
 
       <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 21c-4-2-6-5-6-9 2 1 4 3 6 7 2-4 4-6 6-7 0 4-2 7-6 9z"/>
-            <path d="M12 12V3"/>
-            <path d="M7 7c1 2 3 3 5 3M17 7c-1 2-3 3-5 3"/>
-          </svg>
-        </div>
-        <h3>Mindfulness e Meditazione</h3>
-        <p>Pratiche guidate per coltivare presenza e calma interiore, in gruppo o in percorsi individuali.</p>
+        <div class="seal"></div>
+        <h3>Meditazione</h3>
+        <p>Sede: Monopoli con Melissa e Maria G.<br>Sede: Milano con Paolo</p>
       </div>
 
       <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="6" r="2.2"/>
-            <path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>
-            <path d="M9 13l-2 4M15 13l2 4"/>
-          </svg>
-        </div>
-        <h3>Yoga e Movimento Consapevole</h3>
-        <p>Lezioni e seminari di hatha e vinyasa yoga per riconnettere corpo, respiro e attenzione.</p>
+        <div class="seal"></div>
+        <h3>Reiki, Trattamenti Energetici e di Risveglio Fisico</h3>
+        <p>Sede: Monopoli con Melissa e Maria<br>Sede: Milano con Melissa e Paolo</p>
       </div>
 
       <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <path d="M4 14c2-4 5-6 8-6s6 2 8 6"/>
-            <path d="M4 14c0 3 3 6 8 6s8-3 8-6"/>
-            <circle cx="12" cy="9" r="1.6"/>
-          </svg>
-        </div>
-        <h3>Reiki e Trattamenti Energetici</h3>
-        <p>Corsi di formazione e sedute individuali per il riequilibrio energetico della persona.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 19C5 9 13 4 20 4c0 9-7 15-15 15z"/>
-            <path d="M5 19c3-5 7-8 11-10"/>
-          </svg>
-        </div>
+        <div class="seal"></div>
         <h3>Naturopatia</h3>
-        <p>Percorsi di studio sulle discipline naturali per la salute e il benessere quotidiano.</p>
+        <p>Sede: Monopoli con Melissa</p>
       </div>
 
       <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v18M5 7h14"/>
-            <path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>
-          </svg>
-        </div>
-        <h3>Counseling Olistico</h3>
-        <p>Colloqui individuali per affrontare i momenti di cambiamento con maggiore consapevolezza.</p>
+        <div class="seal"></div>
+        <h3>Fitoenergetica</h3>
+        <p>Sede: Monopoli con Maria G. e Melissa</p>
       </div>
 
       <div class="service-card">
-        <div class="seal">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"/>
-            <path d="M12 16v2"/>
-          </svg>
-        </div>
-        <h3>Alimentazione Consapevole</h3>
-        <p>Seminari pratici su nutrizione e ascolto del corpo, per uno stile di vita più sano.</p>
+        <div class="seal"></div>
+        <h3>Sciamanesimo</h3>
+        <p>Sede: Monopoli con Maria G.<br>Sede: Milano con Paolo</p>
+      </div>
+
+      <div class="service-card">
+        <div class="seal"></div>
+        <h3>Respiro</h3>
+        <p>Sede: Monopoli con Melissa e Maria G.</p>
       </div>
 
     </div>
@@ -409,7 +375,7 @@
           <h3>Ritiro di Respiro Consapevole</h3>
           <p>Un weekend immersi nel bosco, tra pratiche di respiro guidato e silenzio condiviso.</p>
         </div>
-        <a href="#contatti" class="btn btn-outline-dark">Iscriviti</a>
+        <button class="btn btn-outline-dark" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
       </div>
 
       <div class="event-row">
@@ -421,7 +387,7 @@
           <h3>Workshop Reiki I Livello</h3>
           <p>Giornata di formazione teorica e pratica per ricevere la prima sintonizzazione Reiki.</p>
         </div>
-        <a href="#contatti" class="btn btn-outline-dark">Iscriviti</a>
+        <button class="btn btn-outline-dark" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
       </div>
 
       <div class="event-row">
@@ -433,7 +399,7 @@
           <h3>Seminario di Naturopatia d'Autunno</h3>
           <p>I rimedi naturali della stagione, tra teoria e laboratorio pratico in piccoli gruppi.</p>
         </div>
-        <a href="#contatti" class="btn btn-outline-dark">Iscriviti</a>
+        <button class="btn btn-outline-dark" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
       </div>
 
       <div class="event-row">
@@ -445,7 +411,7 @@
           <h3>Meditazione di Fine Anno</h3>
           <p>Una serata di meditazione guidata per chiudere il cerchio dell'anno tutti insieme.</p>
         </div>
-        <a href="#contatti" class="btn btn-outline-dark">Iscriviti</a>
+        <button class="btn btn-outline-dark" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
       </div>
 
     </div>
@@ -534,164 +500,77 @@
     <span class="eyebrow on-dark">Vi aspettiamo</span>
     <h2>Un respiro, un cerchio, un cammino da percorrere insieme</h2>
     <p>Scriveteci per il prossimo seminario o per un percorso di formazione su misura.</p>
-    <a href="#contatti" class="btn btn-gold">Scrivici ora</a>
+    <button class="btn btn-gold" id="ctaOpenModal" type="button">Scrivici ora</button>
   </div>
 </section>
 
-<!-- ===== CONTATTI ===== -->
-<section class="section" id="contatti" style="background: var(--white);">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2>Vieni a trovarci, un seminario alla volta</h2>
-      <p>Per iscrizioni, informazioni sui corsi o richieste di formazione personalizzata, scriveteci: rispondiamo entro 24 ore.</p>
+<!-- ===== MODALE CONTATTI ===== -->
+<div class="contact-modal" id="contactModal" role="dialog" aria-modal="true" aria-label="Modulo di contatto" hidden>
+  <div class="contact-modal-backdrop" id="modalBackdrop"></div>
+  <div class="contact-modal-panel">
+
+    <button class="contact-modal-close" id="modalClose" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="contact-modal-header">
+      <span class="eyebrow">Scriveteci</span>
+      <h2 class="contact-modal-title">Come possiamo aiutarvi?</h2>
+      <p class="contact-modal-sub">Risponderemo entro 24 ore.</p>
     </div>
 
-    <div class="contact-grid">
+    <div class="form-success" id="formSuccess">
+      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      <span>Richiesta inviata. Vi risponderemo entro 24 ore.</span>
+    </div>
 
-      <!-- info -->
-      <div class="reveal">
-        <div class="contact-info-list">
+    <form class="form-card contact-modal-form" id="contactForm" novalidate>
 
-          <div class="info-item">
-            <span class="ic">
-              <svg viewBox="0 0 24 24">
-                <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-            </span>
-            <div>
-              <h4>Indirizzo</h4>
-              <p>Via del Respiro 9, San Lorenzo (SI)</p>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <span class="ic">
-              <svg viewBox="0 0 24 24">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </span>
-            <div>
-              <h4>Telefono</h4>
-              <p>+39 0577 987 654</p>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <span class="ic">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="5" width="18" height="14" rx="2"/>
-                <path d="M3 7l9 6 9-6"/>
-              </svg>
-            </span>
-            <div>
-              <h4>Email</h4>
-              <p>segreteria@icustodidellasorgente.it</p>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <span class="ic">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 7v5l3 3"/>
-              </svg>
-            </span>
-            <div>
-              <h4>Orari segreteria</h4>
-              <p>Da lunedì a venerdì, 9:00 – 18:00</p>
-            </div>
-          </div>
-
+      <div class="field-row">
+        <div class="field">
+          <label for="fname">Nome</label>
+          <input type="text" id="fname" name="nome" required autocomplete="name">
         </div>
-
-        <!-- mappa stilizzata -->
-        <div class="map-box" role="img" aria-label="Posizione de I Custodi della Sorgente">
-          <div class="pin">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22z"/>
-            </svg>
-            <span>I Custodi della Sorgente</span>
-          </div>
-        </div>
-
-        <!-- social -->
-        <div class="social-row">
-          <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r=".6"/>
-            </svg>
-          </a>
-          <a href="#" aria-label="Facebook">
-            <svg viewBox="0 0 24 24">
-              <path d="M14 9h3V6h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2a1 1 0 0 1 1-1z"/>
-            </svg>
-          </a>
-          <a href="#" aria-label="YouTube">
-            <svg viewBox="0 0 24 24">
-              <rect x="2.5" y="6" width="19" height="12" rx="3"/>
-              <path d="M10.5 9.5l5 2.5-5 2.5z"/>
-            </svg>
-          </a>
+        <div class="field">
+          <label for="fphone">Telefono</label>
+          <input type="tel" id="fphone" name="telefono" autocomplete="tel">
         </div>
       </div>
 
-      <!-- form -->
-      <div class="reveal">
-        <form class="form-card" id="contactForm" novalidate>
-
-          <div class="form-success" id="formSuccess">
-            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Richiesta inviata. Vi risponderemo entro 24 ore.</span>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="fname">Nome</label>
-              <input type="text" id="fname" name="nome" required autocomplete="name">
-            </div>
-            <div class="field">
-              <label for="fphone">Telefono</label>
-              <input type="tel" id="fphone" name="telefono" autocomplete="tel">
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" name="email" required autocomplete="email">
-          </div>
-
-          <div class="field">
-            <label for="freason">Tipo di richiesta</label>
-            <select id="freason" name="motivo">
-              <option>Seminario</option>
-              <option>Corso di formazione</option>
-              <option>Consulenza individuale</option>
-              <option>Altra informazione</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="fmsg">Messaggio</label>
-            <textarea id="fmsg" name="messaggio" required placeholder="Raccontateci come possiamo aiutarvi…"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-gold btn-block">
-            Invia richiesta
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M13 6l6 6-6 6"/>
-            </svg>
-          </button>
-          <p class="form-note">Inviando il modulo accettate il trattamento dei dati ai fini della risposta.</p>
-
-        </form>
+      <div class="field">
+        <label for="femail">Email</label>
+        <input type="email" id="femail" name="email" required autocomplete="email">
       </div>
 
-    </div>
+      <div class="field">
+        <label for="freason">Tipo di richiesta</label>
+        <select id="freason" name="motivo">
+          <option>Seminario</option>
+          <option>Corso di formazione</option>
+          <option>Consulenza individuale</option>
+          <option>Altra informazione</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="fmsg">Messaggio</label>
+        <textarea id="fmsg" name="messaggio" required placeholder="Raccontateci come possiamo aiutarvi…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block">
+        Invia richiesta
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+      <p class="form-note">Inviando il modulo accettate il trattamento dei dati ai fini della risposta.</p>
+
+    </form>
+
   </div>
-</section>
+</div>
 
 </main>
 
