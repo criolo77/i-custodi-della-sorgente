@@ -610,10 +610,17 @@
 
 <!-- ===== TESTIMONIANZE ===== -->
 <section class="section testimonials" id="testimonianze">
+  <!--
+    CMS NOTE (Decap CMS):
+    Testimonianze gestite tramite file Markdown in /content/testimonianze/.
+    Frontmatter: nome, ruolo, testo, stelle (1-5).
+    Il carosello legge automaticamente gli ultimi file pubblicati.
+    Per aggiungere: creare un nuovo file .md dal pannello Decap CMS — nessuna modifica al codice.
+  -->
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Voci della comunità</span>
-      <h2>Cosa raccontano i nostri allievi</h2>
+      <span class="eyebrow on-dark">Voci del Cammino</span>
+      <h2 class="t-section-title">Cosa raccontano i nostri allievi</h2>
     </div>
 
     <div class="t-slider reveal" aria-live="polite">
@@ -693,9 +700,9 @@
 </section>
 
 <!-- ===== CTA BAND ===== -->
-<section class="cta-band">
+<section class="cta-band cta-band-light">
   <div class="container reveal">
-    <span class="eyebrow on-dark">Vi aspettiamo</span>
+    <span class="eyebrow">Vi aspettiamo</span>
     <h2>Un respiro, un cerchio, un cammino da percorrere insieme</h2>
     <p>Scriveteci per il prossimo seminario o per un percorso di formazione su misura.</p>
     <button class="btn btn-gold" id="ctaOpenModal" type="button">Scrivici ora</button>
