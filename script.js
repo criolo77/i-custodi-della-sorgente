@@ -194,4 +194,64 @@
     });
   }
 
+  /* ---- Frammenti di Cammino: lightbox ---- */
+  var framItems    = Array.prototype.slice.call(document.querySelectorAll('.frammenti-item'));
+  var framLightbox = document.getElementById('frammentilightbox');
+  var framBackdrop = document.getElementById('frammentilightboxBackdrop');
+  var framClose    = document.getElementById('frammentilightboxClose');
+  var framContent  = document.getElementById('frammentilightboxContent');
+  var framPrev     = document.getElementById('frammentilightboxPrev');
+  var framNext     = document.getElementById('frammentilightboxNext');
+  var framCurrent  = 0;
+
+  function framOpen(idx) {
+    if (!framLightbox) return;
+    framCurrent = (idx + framItems.length) % framItems.length;
+    framRender();
+    framLightbox.hidden = false;
+    document.body.classList.add('modal-open');
+    if (framClose) framClose.focus();
+  }
+
+  function framClose_fn() {
+    if (!framLightbox) return;
+    framLightbox.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+
+  function framRender() {
+    if (!framContent) return;
+    var item = framItems[framCurrent];
+    var img  = item ? item.querySelector('img') : null;
+    if (img) {
+      framContent.innerHTML = '<img src="' + img.src + '" alt="' + (img.alt || '') + '">';
+    } else {
+      // placeholder
+      framContent.innerHTML = '<div class="frammenti-placeholder frammenti-placeholder-lb">'
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
+        + '<span>Foto in arrivo</span></div>';
+    }
+  }
+
+  framItems.forEach(function(item, i) {
+    item.addEventListener('click', function() { framOpen(i); });
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); framOpen(i); }
+    });
+  });
+
+  if (framClose)   framClose.addEventListener('click', framClose_fn);
+  if (framBackdrop) framBackdrop.addEventListener('click', framClose_fn);
+  if (framPrev)    framPrev.addEventListener('click', function() { framOpen(framCurrent - 1); });
+  if (framNext)    framNext.addEventListener('click', function() { framOpen(framCurrent + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (!framLightbox || framLightbox.hidden) return;
+    if (e.key === 'Escape')      framClose_fn();
+    if (e.key === 'ArrowLeft')   framOpen(framCurrent - 1);
+    if (e.key === 'ArrowRight')  framOpen(framCurrent + 1);
+  });
+
 })();

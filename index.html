@@ -36,6 +36,8 @@
       <a href="#chi-siamo">Chi siamo</a>
       <a href="#percorsi">Percorsi</a>
       <a href="#eventi">Seminari</a>
+      <a href="#frammenti">Frammenti di Cammino</a>
+      <a href="#quaderni">Quaderni della Sorgente</a>
       <a href="#testimonianze">Testimonianze</a>
       <button class="nav-link-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button>
       <button class="btn btn-gold" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
@@ -52,6 +54,8 @@
   <a href="#chi-siamo">Chi siamo</a>
   <a href="#percorsi">Percorsi</a>
   <a href="#eventi">Seminari</a>
+  <a href="#frammenti">Frammenti di Cammino</a>
+  <a href="#quaderni">Quaderni della Sorgente</a>
   <a href="#testimonianze">Testimonianze</a>
   <button class="nav-link-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button>
 </nav>
@@ -415,6 +419,192 @@
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ===== FRAMMENTI DI CAMMINO ===== -->
+<section class="section" id="frammenti" style="background: var(--white);">
+  <div class="container">
+
+    <div class="section-head center reveal">
+      <h2>Frammenti di Cammino</h2>
+      <p style="margin-inline:auto;">Ogni seminario lascia un'impronta fatta di incontri, sorrisi, silenzi e trasformazioni. Questa galleria raccoglie alcuni istanti del nostro Cammino condiviso.</p>
+    </div>
+
+    <div class="frammenti-grid reveal-stagger">
+      <div class="frammenti-item frammenti-tall" data-index="0">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+      <div class="frammenti-item frammenti-wide" data-index="1">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+      <div class="frammenti-item" data-index="2">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+      <div class="frammenti-item" data-index="3">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+      <div class="frammenti-item frammenti-tall" data-index="4">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+      <div class="frammenti-item frammenti-wide" data-index="5">
+        <div class="frammenti-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto in arrivo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="frammenti-cta reveal">
+      <a href="frammenti.html" class="btn btn-outline-dark">
+        Scopri tutti i Frammenti
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- lightbox frammenti -->
+<div class="frammenti-lightbox" id="frammentilightbox" hidden role="dialog" aria-modal="true" aria-label="Visualizzazione immagine">
+  <div class="frammenti-lightbox-backdrop" id="frammentilightboxBackdrop"></div>
+  <div class="frammenti-lightbox-panel">
+    <button class="frammenti-lightbox-close" id="frammentilightboxClose" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="frammenti-lightbox-content" id="frammentilightboxContent">
+      <div class="frammenti-placeholder frammenti-placeholder-lb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Foto in arrivo</span>
+      </div>
+    </div>
+    <button class="frammenti-lightbox-nav frammenti-lightbox-prev" id="frammentilightboxPrev" aria-label="Precedente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="frammenti-lightbox-nav frammenti-lightbox-next" id="frammentilightboxNext" aria-label="Successiva">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ===== QUADERNI DELLA SORGENTE ===== -->
+<!--
+  CMS NOTE (Decap CMS):
+  Questa sezione mostra gli ultimi 3 quaderni pubblicati.
+  I contenuti sono gestiti tramite file Markdown in /content/quaderni/.
+  Ogni file Markdown ha frontmatter: title, autore, data, estratto, immagine.
+  Il build system (es. Eleventy / Hugo) legge i file e genera questa griglia automaticamente.
+  Per aggiungere un Quaderno: creare un nuovo file .md dal pannello Decap CMS.
+-->
+<section class="section" id="quaderni">
+  <div class="container">
+
+    <div class="section-head center reveal">
+      <h2>Quaderni della Sorgente</h2>
+      <p style="margin-inline:auto;">Pensieri, riflessioni, meditazioni, articoli ed esperienze nate lungo il Cammino. Ogni Quaderno è una condivisione autentica, scritta per nutrire il dialogo tra Corpo, Mente, Anima e Spirito.</p>
+    </div>
+
+    <div class="quaderni-grid reveal-stagger">
+
+      <!-- Quaderno 1 — segnaposto -->
+      <article class="quaderno-card">
+        <div class="quaderno-cover">
+          <div class="quaderno-cover-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="quaderno-body">
+          <div class="quaderno-meta">
+            <span class="quaderno-autore">I Custodi della Sorgente</span>
+            <span class="quaderno-sep" aria-hidden="true">·</span>
+            <time class="quaderno-data">Luglio 2025</time>
+          </div>
+          <h3 class="quaderno-titolo">Il Silenzio come pratica quotidiana</h3>
+          <p class="quaderno-estratto">Il silenzio non è assenza di suono, ma presenza a sé stessi. In questo Quaderno esploriamo come coltivare uno spazio interiore di ascolto, anche nei ritmi frenetici della vita moderna.</p>
+          <a href="quaderni.html" class="quaderno-link">
+            Leggi il Quaderno
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Quaderno 2 — segnaposto -->
+      <article class="quaderno-card">
+        <div class="quaderno-cover">
+          <div class="quaderno-cover-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="quaderno-body">
+          <div class="quaderno-meta">
+            <span class="quaderno-autore">Maria Gorette</span>
+            <span class="quaderno-sep" aria-hidden="true">·</span>
+            <time class="quaderno-data">Agosto 2025</time>
+          </div>
+          <h3 class="quaderno-titolo">Il tamburo e la memoria della Terra</h3>
+          <p class="quaderno-estratto">Ogni battito del tamburo è una preghiera che riporta al cuore di Madre Terra. Una riflessione sul ritmo come linguaggio ancestrale e sulla guarigione che nasce dall'ascolto profondo della Natura.</p>
+          <a href="quaderni.html" class="quaderno-link">
+            Leggi il Quaderno
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Quaderno 3 — segnaposto -->
+      <article class="quaderno-card">
+        <div class="quaderno-cover">
+          <div class="quaderno-cover-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="quaderno-body">
+          <div class="quaderno-meta">
+            <span class="quaderno-autore">Paolo Crippa</span>
+            <span class="quaderno-sep" aria-hidden="true">·</span>
+            <time class="quaderno-data">Settembre 2025</time>
+          </div>
+          <h3 class="quaderno-titolo">Curare e accompagnare: riflessioni dal confine</h3>
+          <p class="quaderno-estratto">Quindici anni accanto a chi si avvicina alla soglia mi hanno insegnato che la cura più profonda non è tecnica, ma presenza. Un viaggio tra Cure Palliative, Sciamanesimo e la sacralità di ogni incontro.</p>
+          <a href="quaderni.html" class="quaderno-link">
+            Leggi il Quaderno
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="quaderni-cta reveal">
+      <a href="quaderni.html" class="btn btn-outline-dark">
+        Sfoglia tutti i Quaderni
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
   </div>
 </section>
 
