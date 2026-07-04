@@ -22,23 +22,21 @@
 <header class="site-header" id="siteHeader">
   <div class="container">
     <a href="#top" class="brand">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="1.2">
-          <circle cx="12" cy="12" r="2.6"/>
-          <circle cx="12" cy="12" r="6"/>
-          <circle cx="12" cy="12" r="9.5"/>
-        </svg>
+      <span class="brand-mark brand-mark-logo">
+        <img src="images/logo-sorgente.png"
+             alt="Logo I Custodi della Sorgente — rose nel cuore"
+             class="brand-logo-img">
       </span>
-      I Custodi <em>della Sorgente</em>
+      Custodi <em>della Sorgente</em>
     </a>
 
     <nav class="nav-desktop" aria-label="Navigazione principale">
       <a href="#chi-siamo">Chi siamo</a>
       <a href="#percorsi">Percorsi</a>
       <a href="#eventi">Seminari</a>
-      <a href="#frammenti">Frammenti di Cammino</a>
-      <a href="#quaderni">Quaderni della Sorgente</a>
-      <a href="#testimonianze">Testimonianze</a>
+      <a href="#frammenti">Frammenti</a>
+      <a href="#quaderni">Quaderni</a>
+      <a href="#testimonianze">Le Voci</a>
       <button class="nav-link-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button>
       <button class="btn btn-gold" onclick="document.getElementById('ctaOpenModal').click()">Iscriviti</button>
     </nav>
@@ -128,27 +126,40 @@
 <!-- ===== LA NOSTRA VISIONE ===== -->
 <section id="visione" class="section vision-section">
   <div class="container">
+    <div class="vision-manifesto reveal">
 
-    <!-- Titolo -->
-    <div class="vision-header reveal">
+      <!-- 1. Titolo centrato -->
       <h2 class="vision-title">La Nostra Visione</h2>
+
+      <!-- 2. Linea decorativa -->
+      <div class="vision-rule" aria-hidden="true">
+        <span class="vision-rule-line"></span>
+        <svg class="vision-rule-mark" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="2.6" stroke="var(--gold)" stroke-width="1.2"/>
+          <circle cx="12" cy="12" r="6"   stroke="var(--gold)" stroke-width=".9" opacity=".55"/>
+        </svg>
+        <span class="vision-rule-line"></span>
+      </div>
+
+      <!-- 3. Citazione — punto focale -->
+      <blockquote class="vision-quote-center">
+        <p>«Crediamo che nessuna tradizione custodisca da sola tutta la Verità.<br>
+        Ogni autentico cammino, quando nasce dal cuore,<br>
+        conduce alla stessa Sorgente.»</p>
+      </blockquote>
+
+      <!-- 4. Testo introduttivo — colonna stretta, allineato sinistra -->
+      <div class="vision-body">
+        <p>Non desideriamo proporre una nuova filosofia né sostituire le tradizioni esistenti.</p>
+        <p>Crediamo che ogni autentico cammino di ricerca custodisca una parte di una conoscenza più ampia. Quando impariamo ad ascoltare senza dividere, scopriamo che linguaggi diversi possono raccontare la stessa realtà.</p>
+        <p>È da questa convinzione che nasce il progetto <em>I Custodi della Sorgente</em>.</p>
+      </div>
+
     </div>
+  </div>
 
-    <!-- Citazione -->
-    <blockquote class="vision-quote reveal">
-      <p>«Crediamo che nessuna tradizione custodisca da sola tutta la Verità.<br>
-      Ogni autentico cammino, quando nasce dal cuore,<br>
-      conduce alla stessa Sorgente.»</p>
-    </blockquote>
-
-    <!-- Testo introduttivo -->
-    <div class="vision-intro reveal">
-      <p>Non desideriamo proporre una nuova filosofia né sostituire le tradizioni esistenti.</p>
-      <p>Crediamo che ogni autentico cammino di ricerca custodisca una parte di una conoscenza più ampia. Quando impariamo ad ascoltare senza dividere, scopriamo che linguaggi diversi possono raccontare la stessa realtà.</p>
-      <p>È da questa convinzione che nasce il progetto <em>I Custodi della Sorgente</em>.</p>
-    </div>
-
-    <!-- Cinque pilastri -->
+  <div class="container">
+    <!-- I sette pilastri -->
     <div class="pillars reveal-stagger">
 
       <div class="pillar">
@@ -786,34 +797,27 @@
 
       <div class="footer-brand">
         <a href="#top" class="brand">
-          <span class="brand-mark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="1.2">
-              <circle cx="12" cy="12" r="2.6"/>
-              <circle cx="12" cy="12" r="6"/>
-              <circle cx="12" cy="12" r="9.5"/>
-            </svg>
+          <span class="brand-mark brand-mark-logo">
+            <img src="images/logo-sorgente.png"
+                 alt="Logo I Custodi della Sorgente"
+                 class="brand-logo-img">
           </span>
           I Custodi <em>della Sorgente</em>
         </a>
-        <p>Seminari, eventi e percorsi di crescita personale per il benessere di corpo, mente e spirito, dal 2010.</p>
+        <p>Seminari, eventi e percorsi di crescita personale per il benessere di corpo, mente, anima e spirito.</p>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col footer-col-esplora">
         <h4>Esplora</h4>
         <ul>
+          <li><a href="#top">Home</a></li>
           <li><a href="#chi-siamo">Chi siamo</a></li>
           <li><a href="#percorsi">Percorsi</a></li>
-          <li><a href="#eventi">Seminari</a></li>
-          <li><a href="#testimonianze">Testimonianze</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Contatti</h4>
-        <ul>
-          <li><a href="#contatti">Via del Respiro 9, San Lorenzo (SI)</a></li>
-          <li><a href="tel:+390577987654">+39 0577 987 654</a></li>
-          <li><a href="mailto:segreteria@icustodidellasorgente.it">segreteria@icustodidellasorgente.it</a></li>
+          <li><a href="#eventi">Seminari ed Eventi</a></li>
+          <li><a href="#frammenti">Frammenti di Cammino</a></li>
+          <li><a href="#quaderni">Quaderni della Sorgente</a></li>
+          <li><a href="#testimonianze">Le Voci del Cammino</a></li>
+          <li><button class="footer-contact-btn" onclick="document.getElementById('ctaOpenModal').click()">Contatti</button></li>
         </ul>
       </div>
 
@@ -826,8 +830,12 @@
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year"></span> I Custodi della Sorgente. Tutti i diritti riservati.</span>
       <span>Realizzato con cura, respiro dopo respiro.</span>
+      <div class="footer-casa-wrap">
+        <a href="casa-dei-custodi.html" class="btn footer-casa-btn">La Casa dei Custodi</a>
+        <span class="footer-casa-label">Area riservata</span>
+      </div>
+      <span>© <span id="year"></span> I Custodi della Sorgente.</span>
     </div>
   </div>
 </footer>

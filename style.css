@@ -182,7 +182,7 @@ h1, h2, h3, h4 {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 200;
-  padding-block: 1.3rem;
+  padding-block: 1.6rem;
   transition: background .4s ease, padding .4s ease, box-shadow .4s ease;
 }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; }
@@ -199,8 +199,9 @@ h1, h2, h3, h4 {
   gap: .7rem;
   font-family: var(--ff-display);
   color: var(--cream);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   letter-spacing: .01em;
+  flex-shrink: 0;
 }
 .brand-mark {
   width: 38px; height: 38px;
@@ -1730,3 +1731,224 @@ body.modal-open { overflow: hidden; }
 }
 /* eyebrow standard (non on-dark) già gestito correttamente da .eyebrow */
 /* il pulsante .btn-gold rimane invariato — nessuna sovrascrittura */
+
+/* ============================================================
+   NAV DESKTOP — etichette brevi → gap ripristinato
+   ============================================================ */
+.nav-desktop {
+  gap: clamp(1rem, 1.6vw, 2rem);
+}
+.nav-desktop a,
+.nav-desktop .nav-link-btn {
+  font-size: .9rem;
+}
+.nav-desktop .btn {
+  font-size: .84rem;
+  padding: .65rem 1.3rem;
+  margin-left: .4rem;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   FOOTER GRID — 2 colonne: brand + esplora
+   ============================================================ */
+.footer-grid {
+  grid-template-columns: 1.2fr 1fr !important;
+}
+.footer-brand { grid-column: auto; }
+
+.footer-col-esplora ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem 1.4rem;
+}
+.footer-col-esplora ul li { line-height: 1.4; }
+
+/* pulsante Contatti nel footer — stile link */
+.footer-contact-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--ff-body);
+  font-size: .92rem;
+  color: rgba(250, 246, 239, .78);
+  cursor: pointer;
+  transition: color .3s ease;
+}
+.footer-contact-btn:hover { color: var(--gold-soft); }
+
+/* ============================================================
+   FOOTER BOTTOM — tre elementi: sinistra · pulsante · destra
+   ============================================================ */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(250, 246, 239, .14);
+  font-size: .8rem;
+  color: rgba(250, 246, 239, .55);
+}
+
+.footer-casa-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+}
+
+.footer-casa-btn {
+  background: var(--gold);
+  color: var(--bordeaux-900);
+  border: 1.5px solid var(--gold);
+  border-radius: 2px;
+  font-family: var(--ff-body);
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .03em;
+  padding: .55rem 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .35s ease, transform .35s ease, box-shadow .35s ease;
+  white-space: nowrap;
+}
+.footer-casa-btn:hover {
+  background: var(--gold-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(61,15,24,.35);
+}
+
+.footer-casa-label {
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 239, .38);
+}
+
+/* responsive footer */
+@media (max-width: 980px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .footer-col-esplora ul { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-col-esplora ul { grid-template-columns: 1fr; }
+  .footer-bottom { justify-content: center; text-align: center; }
+}
+
+/* ============================================================
+   VISIONE — layout manifesto
+   ============================================================ */
+
+.vision-manifesto {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* titolo centrato */
+.vision-manifesto .vision-title {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  color: var(--bordeaux-900);
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+/* linea decorativa */
+.vision-rule {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  width: min(320px, 80%);
+  margin-bottom: clamp(2.8rem, 5vw, 4.5rem);
+}
+.vision-rule-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--dir, right), transparent, var(--gold-deep));
+}
+.vision-rule-line:last-child { --dir: left; }
+.vision-rule-mark {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* citazione — punto focale, oro */
+.vision-quote-center {
+  border: none;
+  padding: 0;
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+  max-width: 600px;
+}
+.vision-quote-center p {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  line-height: 1.65;
+  color: var(--gold-deep);
+  letter-spacing: .01em;
+}
+
+/* corpo testo — colonna stretta, allineato sinistra */
+.vision-body {
+  text-align: left;
+  width: 100%;
+  max-width: 580px;
+}
+.vision-body p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: var(--ink-soft);
+  margin-top: 1.3rem;
+}
+.vision-body p:first-child { margin-top: 0; }
+.vision-body em {
+  font-style: italic;
+  color: var(--bordeaux-700);
+}
+
+/* brand font-size già definita nella regola principale */
+
+/* ============================================================
+   BRAND LOGO IMAGE — sostituzione cerchi SVG con logo rose
+   ============================================================ */
+.brand-mark-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.brand-logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 2px rgba(201,162,75,.2));
+}
+/* footer: leggermente più piccolo */
+.footer-brand .brand-mark-logo {
+  width: 38px;
+  height: 38px;
+}
+.footer-brand .brand-logo-img {
+  width: 34px;
+  height: 34px;
+}
