@@ -1334,8 +1334,13 @@ footer {
   background: transparent !important;
 }
 
-/* lock body scroll when modal open */
-body.modal-open { overflow: hidden; }
+/* lock body scroll when modal open — position:fixed preserves scroll on all browsers */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  /* top viene impostato via JS con il valore negativo dello scrollY */
+}
 
 /* nav button che apre la modale: stesso aspetto dei link nav */
 .nav-link-btn {
@@ -1952,3 +1957,38 @@ body.modal-open { overflow: hidden; }
   width: 34px;
   height: 34px;
 }
+
+/* ============================================================
+   FORM — checkbox privacy
+   ============================================================ */
+.field-checkbox { margin-bottom: 1.3rem; }
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  cursor: pointer;
+  font-family: var(--ff-body);
+  font-size: .9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  margin-top: .18rem;
+  accent-color: var(--bordeaux-700);
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--cream);
+}
+.checkbox-link {
+  color: var(--bordeaux-700);
+  text-decoration: underline;
+  text-decoration-color: var(--gold-deep);
+  text-underline-offset: 3px;
+  transition: color .3s ease;
+}
+.checkbox-link:hover { color: var(--brick); }

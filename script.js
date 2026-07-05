@@ -151,13 +151,14 @@
   var closeBtn   = document.getElementById("modalClose");
   var backdrop   = document.getElementById("modalBackdrop");
   var firstFocus = null;
-  var savedScrollY = 0;  // memorizza posizione prima dell'apertura
+  var savedScrollY = 0;
 
   function openModal() {
     if (!modal) return;
-    savedScrollY = window.scrollY;          // salva posizione corrente
-    modal.hidden = false;
+    savedScrollY = window.scrollY;
+    document.body.style.top = "-" + savedScrollY + "px";
     document.body.classList.add("modal-open");
+    modal.hidden = false;
     firstFocus = modal.querySelector("input, select, textarea, button:not(#modalClose)");
     if (firstFocus) firstFocus.focus();
   }
@@ -166,8 +167,9 @@
     if (!modal) return;
     modal.hidden = true;
     document.body.classList.remove("modal-open");
-    window.scrollTo({ top: savedScrollY, behavior: "instant" }); // ripristina senza scroll
-    if (ctaBtn) ctaBtn.focus();
+    document.body.style.top = "";
+    window.scrollTo({ top: savedScrollY, behavior: "instant" });
+    if (ctaBtn) ctaBtn.focus({ preventScroll: true }); // focus senza scroll automatico
   }
 
   if (ctaBtn)   ctaBtn.addEventListener("click", openModal);
