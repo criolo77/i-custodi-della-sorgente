@@ -1992,3 +1992,12 @@ body.modal-open {
   transition: color .3s ease;
 }
 .checkbox-link:hover { color: var(--brick); }
+
+/* ============================================================
+   PAGINE PROFILO — header sempre scuro (sfondo crema, no hero)
+   ============================================================ */
+body.page-profile .site-header {
+  background: rgba(58, 15, 23, .92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 30px -16px rgba(0, 0, 0, .5);
+}
