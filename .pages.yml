@@ -131,4 +131,11 @@ content:
             value: bozza
           - label: Pubblicato
             value: pubblicato
+      - name: seoTitle
+        label: SEO Title
+        type: string
+      - name: metaDescription
+        label: Meta Description
+        type: text
+
 
