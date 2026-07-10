@@ -1,0 +1,145 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: testimonianze
+    label: Testimonianze
+    type: file
+    path: content/testimonianze.json
+    format: json
+    list: true
+    fields:
+      - name: nome
+        label: Nome
+        type: string
+        required: true
+      - name: ruolo
+        label: Ruolo
+        type: string
+      - name: testo
+        label: Testo
+        type: text
+        required: true
+      - name: luogo
+        label: Luogo
+        type: string
+      - name: data
+        label: Data
+        type: date
+      - name: inEvidenza
+        label: In evidenza
+        type: boolean
+        default: false
+
+  - name: seminari
+    label: Seminari
+    type: file
+    path: content/seminari.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: sottotitolo
+        label: Sottotitolo
+        type: string
+      - name: data
+        label: Data
+        type: date
+      - name: orario
+        label: Orario
+        type: string
+      - name: luogo
+        label: Luogo
+        type: string
+      - name: descrizione
+        label: Descrizione
+        type: text
+      - name: link
+        label: Link
+        type: string
+      - name: stato
+        label: Stato
+        type: select
+        options:
+          - label: Aperto
+            value: aperto
+          - label: Concluso
+            value: concluso
+
+  - name: frammenti
+    label: Frammenti
+    type: file
+    path: content/frammenti.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: testo
+        label: Testo
+        type: text
+        required: true
+      - name: categoria
+        label: Categoria
+        type: string
+      - name: data
+        label: Data
+        type: date
+      - name: autore
+        label: Autore
+        type: string
+      - name: inEvidenza
+        label: In evidenza
+        type: boolean
+        default: false
+
+  - name: quaderni
+    label: Quaderni
+    type: file
+    path: content/quaderni.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: autore
+        label: Autore
+        type: string
+      - name: estratto
+        label: Estratto
+        type: text
+      - name: descrizione
+        label: Descrizione
+        type: text
+      - name: contenuto
+        label: Contenuto
+        type: text
+      - name: copertina
+        label: Copertina
+        type: image
+      - name: pdf
+        label: PDF
+        type: string
+      - name: data
+        label: Data
+        type: date
+      - name: stato
+        label: Stato
+        type: select
+        options:
+          - label: Bozza
+            value: bozza
+          - label: Pubblicato
+            value: pubblicato
