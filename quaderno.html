@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quaderno - Custodi della Sorgente</title>
+  <meta name="description" content="Quaderno della Sorgente: pensieri, riflessioni e materiali dal cammino dei Custodi.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .quaderno-template {
+      background: var(--white);
+      padding-top: 8rem;
+    }
+
+    .quaderno-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+
+    .quaderno-detail-cover {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--cream);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+    }
+
+    .quaderno-detail-cover img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quaderno-detail-body {
+      max-width: 760px;
+    }
+
+    .quaderno-detail-title {
+      margin: 0.6rem 0 1rem;
+    }
+
+    .quaderno-detail-meta {
+      color: var(--gold-dark);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .quaderno-detail-text {
+      color: var(--ink-soft);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-top: 1.5rem;
+      white-space: pre-line;
+    }
+
+    .quaderno-detail-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .quaderno-pdf-note {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 820px) {
+      .quaderno-detail {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header scrolled">
+    <div class="container nav">
+      <a href="index.html#top" class="brand">
+        <span class="brand-mark brand-mark-logo">
+          <img src="images/logo-sorgente.png" alt="Logo Custodi della Sorgente" class="brand-logo-img">
+        </span>
+        Custodi <em>della Sorgente</em>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigazione principale">
+        <a href="index.html#eventi">Seminari</a>
+        <a href="index.html#frammenti">Frammenti</a>
+        <a href="index.html#quaderni">Quaderni</a>
+        <a href="index.html#testimonianze">Le Voci</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section quaderno-template">
+      <div class="container">
+        <article class="quaderno-detail" id="quadernoDetail" aria-live="polite">
+          <div class="quaderno-detail-cover">
+            <div class="quaderno-cover-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="quaderno-detail-body">
+            <span class="eyebrow">Quaderni della Sorgente</span>
+            <h1 class="quaderno-detail-title">Caricamento...</h1>
+            <p class="quaderno-detail-text">Stiamo aprendo il quaderno richiesto.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Realizzato con cura, respiro dopo respiro.</span>
+        <span>© <span id="year"></span> Custodi della Sorgente.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function formatDate(value) {
+        if (!value) return "";
+        var date = new Date(value + "T00:00:00");
+        if (Number.isNaN(date.getTime())) return value;
+        return date.toLocaleDateString("it-IT", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        });
+      }
+
+      function getRequestedSlug(items) {
+        var params = new URLSearchParams(window.location.search);
+        var slug = params.get("slug");
+        if (slug) return slug;
+        return items[0] && items[0].slug ? items[0].slug : "";
+      }
+
+      function renderQuaderno(item) {
+        var root = document.getElementById("quadernoDetail");
+        if (!root) return;
+
+        var title = item.titolo || "Quaderno della Sorgente";
+        var cover = item.copertina
+          ? '<img src="' + escapeHtml(item.copertina) + '" alt="' + escapeHtml(title) + '">'
+          : '<div class="quaderno-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
+        var text = item.contenuto || item.testo || item.descrizione || "Questo quaderno sara disponibile a breve.";
+        var pdf = item.pdf
+          ? '<a class="btn btn-outline-dark" href="' + escapeHtml(item.pdf) + '">Apri il PDF</a>'
+          : '<p class="quaderno-pdf-note">PDF non ancora disponibile.</p>';
+
+        document.title = title + " - Custodi della Sorgente";
+        root.innerHTML = '<div class="quaderno-detail-cover">' + cover + '</div>'
+          + '<div class="quaderno-detail-body">'
+          + '<span class="eyebrow">Quaderni della Sorgente</span>'
+          + '<div class="quaderno-detail-meta">' + escapeHtml([item.autore || "Custodi della Sorgente", formatDate(item.data)].filter(Boolean).join(" · ")) + '</div>'
+          + '<h1 class="quaderno-detail-title">' + escapeHtml(title) + '</h1>'
+          + '<p class="quaderno-detail-text">' + escapeHtml(text) + '</p>'
+          + '<div class="quaderno-detail-actions">'
+          + pdf
+          + '<a class="btn btn-outline-dark" href="index.html#quaderni">Torna ai Quaderni</a>'
+          + '</div>'
+          + '</div>';
+      }
+
+      function renderNotFound() {
+        var root = document.getElementById("quadernoDetail");
+        if (!root) return;
+        root.innerHTML = '<div class="quaderno-detail-body">'
+          + '<span class="eyebrow">Quaderni della Sorgente</span>'
+          + '<h1 class="quaderno-detail-title">Quaderno non trovato</h1>'
+          + '<p class="quaderno-detail-text">Il quaderno richiesto non e presente nei contenuti pubblicati.</p>'
+          + '<div class="quaderno-detail-actions"><a class="btn btn-outline-dark" href="index.html#quaderni">Torna ai Quaderni</a></div>'
+          + '</div>';
+      }
+
+      fetch("content/quaderni.json", { cache: "no-store" })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Impossibile caricare i quaderni");
+          return response.json();
+        })
+        .then(function (items) {
+          if (!Array.isArray(items) || !items.length) {
+            renderNotFound();
+            return;
+          }
+          var slug = getRequestedSlug(items);
+          var item = items.find(function (entry) { return entry.slug === slug; });
+          if (item) renderQuaderno(item);
+          else renderNotFound();
+        })
+        .catch(renderNotFound);
+    })();
+  </script>
+</body>
+</html>

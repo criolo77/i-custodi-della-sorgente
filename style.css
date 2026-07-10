@@ -405,13 +405,16 @@ h1, h2, h3, h4 {
 /* ---------- CHI SIAMO ---------- */
 .about-grid {
   display: grid;
-  grid-template-columns: .95fr 1.05fr;
-  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
   align-items: center;
+  justify-items: center;
+  text-align: center;
 }
 .about-media {
   position: relative;
   aspect-ratio: 4 / 5;
+  width: min(100%, 520px);
   border-radius: 4px;
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -425,7 +428,16 @@ h1, h2, h3, h4 {
   pointer-events: none;
   border-radius: 2px;
 }
-.about-text p { color: var(--ink-soft); margin-top: 1.1rem; max-width: 56ch; }
+.about-text {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.about-text p {
+  color: var(--ink-soft);
+  margin-top: 1.1rem;
+  margin-inline: auto;
+  max-width: 64ch;
+}
 
 /* --- about section: nuovi stili testo --- */
 .about-title {
@@ -434,6 +446,7 @@ h1, h2, h3, h4 {
   font-size: clamp(1.55rem, 3.2vw, 2.1rem);
   line-height: 1.28;
   color: var(--bordeaux-900);
+  text-align: center;
   margin-bottom: .4rem;
 }
 .about-body {
@@ -443,6 +456,7 @@ h1, h2, h3, h4 {
   line-height: 1.75;
   color: var(--ink-soft);
   margin-top: 1.2rem;
+  margin-inline: auto;
   max-width: 54ch;
 }
 
@@ -2000,4 +2014,24 @@ body.page-profile .site-header {
   background: rgba(58, 15, 23, .92);
   backdrop-filter: blur(8px);
   box-shadow: 0 8px 30px -16px rgba(0, 0, 0, .5);
+}
+
+/* Fix v34: foto di gruppo sopra, testo centrato sotto */
+#chi-siamo .about-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  text-align: center !important;
+}
+
+#chi-siamo .about-media {
+  width: min(100%, 520px) !important;
+  margin-inline: auto !important;
+}
+
+#chi-siamo .about-text,
+#chi-siamo .about-title,
+#chi-siamo .about-body {
+  text-align: center !important;
+  margin-inline: auto !important;
 }

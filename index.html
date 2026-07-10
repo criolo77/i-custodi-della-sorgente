@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body>
 
@@ -379,7 +379,7 @@
       <p>Appuntamenti per vivere la pratica dal vivo, in presenza, insieme alla nostra comunità.</p>
     </div>
 
-    <div class="events-list reveal-stagger">
+    <div class="events-list reveal-stagger" id="seminariList" data-content="seminari">
 
       <div class="event-row">
         <div class="event-date">
@@ -442,7 +442,7 @@
       <p style="margin-inline:auto;">Ogni seminario lascia un'impronta fatta di incontri, sorrisi, silenzi e trasformazioni. Questa galleria raccoglie alcuni istanti del nostro Cammino condiviso.</p>
     </div>
 
-    <div class="frammenti-grid reveal-stagger">
+    <div class="frammenti-grid reveal-stagger" id="frammentiGrid" data-content="frammenti">
       <div class="frammenti-item frammenti-tall" data-index="0">
         <div class="frammenti-placeholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -530,7 +530,7 @@
       <p style="margin-inline:auto;">Pensieri, riflessioni, meditazioni, articoli ed esperienze nate lungo il Cammino. Ogni Quaderno è una condivisione autentica, scritta per nutrire il dialogo tra Corpo, Mente, Anima e Spirito.</p>
     </div>
 
-    <div class="quaderni-grid reveal-stagger">
+    <div class="quaderni-grid reveal-stagger" id="quaderniGrid" data-content="quaderni">
 
       <!-- Quaderno 1 — segnaposto -->
       <article class="quaderno-card">
@@ -634,7 +634,7 @@
       <p style="margin-inline:auto; color:var(--gold-soft); margin-top:1rem; font-size:1rem;">Esperienze autentiche di chi ha condiviso un tratto di strada con Custodi della Sorgente.</p>
     </div>
 
-    <div class="t-slider reveal" aria-live="polite">
+    <div class="t-slider reveal" id="testimonianzeSlider" data-content="testimonianze" aria-live="polite">
 
       <div class="t-slide active">
         <div class="t-card">

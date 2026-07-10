@@ -1,0 +1,18 @@
+[
+  {
+    "titolo": "Soglia",
+    "testo": "Ci sono parole che non spiegano: preparano il luogo in cui qualcosa puo essere ascoltato.",
+    "categoria": "appunti",
+    "data": "2026-02-21",
+    "autore": "Redazione",
+    "inEvidenza": true
+  },
+  {
+    "titolo": "Intervallo",
+    "testo": "Il silenzio non interrompe il discorso. Gli restituisce profondita.",
+    "categoria": "frasi",
+    "data": "2026-03-05",
+    "autore": "Redazione",
+    "inEvidenza": false
+  }
+]

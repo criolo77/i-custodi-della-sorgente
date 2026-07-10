@@ -85,13 +85,147 @@
     }
   });
 
-  /* ---- slider testimonianze ---- */
-  var slides   = Array.prototype.slice.call(document.querySelectorAll(".t-slide"));
-  var dotsWrap = document.getElementById("tDots");
-  var current  = 0;
-  var timer;
+  /* ---- contenuti Pages CMS via JSON statici ---- */
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
-  if (slides.length && dotsWrap) {
+  function formatDate(value, options) {
+    if (!value) return "";
+    var date = new Date(value + "T00:00:00");
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleDateString("it-IT", options || {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  function fetchJson(path) {
+    return fetch(path, { cache: "no-store" }).then(function (response) {
+      if (!response.ok) throw new Error("Impossibile caricare " + path);
+      return response.json();
+    });
+  }
+
+  function renderSeminari(items) {
+    var root = document.getElementById("seminariList");
+    if (!root || !Array.isArray(items) || !items.length) return;
+
+    root.innerHTML = items.map(function (item) {
+      var date = item.data ? new Date(item.data + "T00:00:00") : null;
+      var day = date && !Number.isNaN(date.getTime()) ? String(date.getDate()).padStart(2, "0") : "--";
+      var month = date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("it-IT", { month: "short" }).replace(".", "")
+        : "";
+
+      return '<div class="event-row">'
+        + '<div class="event-date"><span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span></div>'
+        + '<div class="event-info">'
+        + '<h3>' + escapeHtml(item.titolo) + '</h3>'
+        + '<p>' + escapeHtml(item.descrizione || item.sottotitolo || "") + '</p>'
+        + (item.luogo || item.orario ? '<p><strong>' + escapeHtml([item.luogo, item.orario].filter(Boolean).join(" · ")) + '</strong></p>' : "")
+        + '</div>'
+        + '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>'
+        + '</div>';
+    }).join("");
+  }
+
+  function renderFrammenti(items) {
+    var root = document.getElementById("frammentiGrid");
+    if (!root || !Array.isArray(items) || !items.length) return;
+    var layoutClasses = ["frammenti-tall", "frammenti-wide", "", "", "frammenti-tall", "frammenti-wide"];
+
+    root.innerHTML = items.slice(0, 6).map(function (item, index) {
+      var image = item.immagine || item.image || item.foto || "";
+      var layout = layoutClasses[index % layoutClasses.length];
+      var content = image
+        ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">'
+        : '<div class="frammenti-placeholder">'
+          + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
+          + '<span>' + escapeHtml(item.titolo || "Frammento") + '</span>'
+          + '</div>';
+      return '<div class="frammenti-item ' + layout + '" data-index="' + index + '">' + content + '</div>';
+    }).join("");
+  }
+
+  function renderQuaderni(items) {
+    var root = document.getElementById("quaderniGrid");
+    if (!root || !Array.isArray(items) || !items.length) return;
+
+    root.innerHTML = items.slice(0, 3).map(function (item) {
+      var slug = item.slug || "";
+      var href = slug ? "quaderno.html?slug=" + encodeURIComponent(slug) : "quaderno.html";
+      var cover = item.copertina
+        ? '<img src="' + escapeHtml(item.copertina) + '" alt="' + escapeHtml(item.titolo || "Quaderno") + '">'
+        : '<div class="quaderno-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
+
+      return '<article class="quaderno-card">'
+        + '<div class="quaderno-cover">' + cover + '</div>'
+        + '<div class="quaderno-body">'
+        + '<div class="quaderno-meta"><span class="quaderno-autore">' + escapeHtml(item.autore || "Custodi della Sorgente") + '</span><span class="quaderno-sep" aria-hidden="true">·</span><time class="quaderno-data">' + escapeHtml(formatDate(item.data, { month: "long", year: "numeric" })) + '</time></div>'
+        + '<h3 class="quaderno-titolo">' + escapeHtml(item.titolo) + '</h3>'
+        + '<p class="quaderno-estratto">' + escapeHtml(item.estratto || item.descrizione || "") + '</p>'
+        + '<a href="' + escapeHtml(href) + '" class="quaderno-link">Leggi il Quaderno <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>'
+        + '</div>'
+        + '</article>';
+    }).join("");
+  }
+
+  function renderTestimonianze(items) {
+    var root = document.getElementById("testimonianzeSlider");
+    var dots = document.getElementById("tDots");
+    if (!root || !Array.isArray(items) || !items.length) return;
+    if (dots) dots.innerHTML = "";
+
+    root.innerHTML = items.map(function (item, index) {
+      var stars = '<svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>';
+      return '<div class="t-slide' + (index === 0 ? " active" : "") + '">'
+        + '<div class="t-card">'
+        + '<div class="t-stars">' + stars.repeat(5) + '</div>'
+        + '<p class="t-quote">"' + escapeHtml(item.testo || "") + '"</p>'
+        + '<p class="t-name">' + escapeHtml(item.nome || "") + '</p>'
+        + '<p class="t-role">' + escapeHtml(item.ruolo || item.luogo || "") + '</p>'
+        + '</div>'
+        + '</div>';
+    }).join("");
+  }
+
+  function bindCmsContactButtons() {
+    document.querySelectorAll("[data-open-contact]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var trigger = document.getElementById("ctaOpenModal");
+        if (trigger) trigger.click();
+      });
+    });
+  }
+
+  function loadCmsContent() {
+    return Promise.allSettled([
+      fetchJson("content/seminari.json").then(renderSeminari),
+      fetchJson("content/frammenti.json").then(renderFrammenti),
+      fetchJson("content/quaderni.json").then(renderQuaderni),
+      fetchJson("content/testimonianze.json").then(renderTestimonianze)
+    ]).then(function () {
+      bindCmsContactButtons();
+    });
+  }
+
+  /* ---- slider testimonianze ---- */
+  function initTestimonialsSlider() {
+    var slides   = Array.prototype.slice.call(document.querySelectorAll(".t-slide"));
+    var dotsWrap = document.getElementById("tDots");
+    var current  = 0;
+    var timer;
+
+    if (!slides.length || !dotsWrap) return;
+    dotsWrap.innerHTML = "";
+
     slides.forEach(function (_, i) {
       var dot = document.createElement("button");
       dot.className = "t-dot" + (i === 0 ? " active" : "");
@@ -199,14 +333,17 @@
   }
 
   /* ---- Frammenti di Cammino: lightbox ---- */
-  var framItems    = Array.prototype.slice.call(document.querySelectorAll('.frammenti-item'));
-  var framLightbox = document.getElementById('frammentilightbox');
-  var framBackdrop = document.getElementById('frammentilightboxBackdrop');
-  var framClose    = document.getElementById('frammentilightboxClose');
-  var framContent  = document.getElementById('frammentilightboxContent');
-  var framPrev     = document.getElementById('frammentilightboxPrev');
-  var framNext     = document.getElementById('frammentilightboxNext');
-  var framCurrent  = 0;
+  function initFrammentiLightbox() {
+    var framItems    = Array.prototype.slice.call(document.querySelectorAll('.frammenti-item'));
+    var framLightbox = document.getElementById('frammentilightbox');
+    var framBackdrop = document.getElementById('frammentilightboxBackdrop');
+    var framClose    = document.getElementById('frammentilightboxClose');
+    var framContent  = document.getElementById('frammentilightboxContent');
+    var framPrev     = document.getElementById('frammentilightboxPrev');
+    var framNext     = document.getElementById('frammentilightboxNext');
+    var framCurrent  = 0;
+
+    if (!framItems.length || !framLightbox) return;
 
   function framOpen(idx) {
     if (!framLightbox) return;
@@ -251,11 +388,17 @@
   if (framPrev)    framPrev.addEventListener('click', function() { framOpen(framCurrent - 1); });
   if (framNext)    framNext.addEventListener('click', function() { framOpen(framCurrent + 1); });
 
-  document.addEventListener('keydown', function(e) {
-    if (!framLightbox || framLightbox.hidden) return;
-    if (e.key === 'Escape')      framClose_fn();
-    if (e.key === 'ArrowLeft')   framOpen(framCurrent - 1);
-    if (e.key === 'ArrowRight')  framOpen(framCurrent + 1);
+    document.addEventListener('keydown', function(e) {
+      if (!framLightbox || framLightbox.hidden) return;
+      if (e.key === 'Escape')      framClose_fn();
+      if (e.key === 'ArrowLeft')   framOpen(framCurrent - 1);
+      if (e.key === 'ArrowRight')  framOpen(framCurrent + 1);
+    });
+  }
+
+  loadCmsContent().then(function () {
+    initTestimonialsSlider();
+    initFrammentiLightbox();
   });
 
 })();
