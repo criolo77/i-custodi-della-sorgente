@@ -49,6 +49,9 @@ content:
       - name: descrizione
         label: Descrizione
         type: text
+      - name: immagine
+        label: Immagine
+        type: image
       - name: link
         label: Link
         type: string
