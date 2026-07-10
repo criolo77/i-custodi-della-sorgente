@@ -14,23 +14,14 @@ content:
         label: Nome
         type: string
         required: true
-      - name: ruolo
-        label: Ruolo
-        type: string
       - name: testo
-        label: Testo
+        label: Testimonianza
         type: text
         required: true
-      - name: luogo
-        label: Luogo
-        type: string
-      - name: data
-        label: Data
-        type: date
-      - name: inEvidenza
-        label: In evidenza
-        type: boolean
-        default: false
+      - name: foto
+        label: Foto
+        type: image
+        required: false
 
   - name: seminari
     label: Seminari
