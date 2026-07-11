@@ -59,10 +59,11 @@ content:
         label: Stato
         type: select
         options:
-          - label: Aperto
-            value: aperto
-          - label: Concluso
-            value: concluso
+          values:
+            - value: aperto
+              label: Aperto
+            - value: concluso
+              label: Concluso
 
   - name: frammenti
     label: Frammenti
@@ -141,4 +142,4 @@ content:
         label: Meta Description
         type: text
 
-
+    
