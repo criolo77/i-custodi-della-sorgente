@@ -7,7 +7,7 @@
     "luogo": "Online",
     "descrizione": "Due ore di lavoro guidato con esercizi, letture brevi e confronto finale.",
     "link": "https://example.com/seminari/pratiche-di-ascolto",
-    "stato": "in-programma"
+    "stato": "concluso"
   },
   {
     "titolo": "Quaderno aperto",
@@ -17,6 +17,13 @@
     "luogo": "Milano",
     "descrizione": "Un incontro pratico per trasformare appunti sparsi in materiali condivisibili.",
     "link": "https://example.com/seminari/quaderno-aperto",
-    "stato": "bozza"
+    "stato": "concluso"
+  },
+  {
+    "titolo": "riveglio del sangue",
+    "sottotitolo": "risveglia i tuoi diritti di sangue",
+    "data": "2026-09-04",
+    "luogo": "monopoli",
+    "stato": "aperto"
   }
 ]
