@@ -131,10 +131,11 @@ content:
         label: Stato
         type: select
         options:
-          - label: Bozza
-            value: bozza
-          - label: Pubblicato
-            value: pubblicato
+          values:
+            - value: bozza
+              label: Bozza
+            - value: pubblicato
+              label: Pubblicato
       - name: seoTitle
         label: SEO Title
         type: string
@@ -142,4 +143,3 @@ content:
         label: Meta Description
         type: text
 
-    
