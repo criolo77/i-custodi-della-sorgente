@@ -69,6 +69,8 @@ content:
               label: Aperto
             - value: concluso
               label: Concluso
+            - value: bozza
+              label: Bozza
 
   - name: frammenti
     label: Frammenti
@@ -147,4 +149,3 @@ content:
       - name: metaDescription
         label: Meta Description
         type: text
-
