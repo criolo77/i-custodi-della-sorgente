@@ -818,6 +818,11 @@ h1, h2, h3, h4 {
 .event-info h3 { font-size: 1.2rem; }
 .event-info p  { color: var(--ink-soft); font-size: .92rem; margin-top: .35rem; }
 .event-row .btn { padding: .75rem 1.4rem; font-size: .82rem; }
+.event-row .btn.is-disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 /* ---------- TESTIMONIANZE ---------- */
 .testimonials {

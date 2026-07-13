@@ -142,9 +142,14 @@
 
   function renderSeminari(items) {
     var root = document.getElementById("seminariList");
-    if (!root || !Array.isArray(items) || !items.length) return;
+    if (!root || !Array.isArray(items)) return;
 
-    root.innerHTML = items.map(function (item) {
+    var visibili = items.filter(function (item) {
+      return item.stato !== "bozza";
+    });
+    if (!visibili.length) return;
+
+    root.innerHTML = visibili.map(function (item) {
       var date = item.startDate ? new Date(item.startDate + "T00:00:00") : null;
       var day = date && !Number.isNaN(date.getTime()) ? String(date.getDate()).padStart(2, "0") : "--";
       var month = date && !Number.isNaN(date.getTime())
@@ -153,6 +158,16 @@
       var dateRange = formatDateRange(item.startDate, item.endDate);
       var metaParts = [dateRange, item.luogo, item.orario].filter(Boolean);
 
+      var isConcluso = item.stato === "concluso";
+      var actionHtml;
+      if (isConcluso) {
+        actionHtml = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Concluso</button>';
+      } else if (item.link) {
+        actionHtml = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link) + '" target="_blank" rel="noopener">Iscriviti</a>';
+      } else {
+        actionHtml = '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>';
+      }
+
       return '<div class="event-row">'
         + '<div class="event-date"><span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span></div>'
         + '<div class="event-info">'
@@ -160,7 +175,7 @@
         + '<p>' + escapeHtml(item.descrizione || item.sottotitolo || "") + '</p>'
         + (metaParts.length ? '<p><strong>' + escapeHtml(metaParts.join(" · ")) + '</strong></p>' : "")
         + '</div>'
-        + '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>'
+        + actionHtml
         + '</div>';
     }).join("");
   }
