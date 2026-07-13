@@ -37,9 +37,14 @@ content:
       - name: sottotitolo
         label: Sottotitolo
         type: string
-      - name: data
-        label: Data
+      - name: startDate
+        label: Data inizio
         type: date
+        required: true
+      - name: endDate
+        label: Data fine
+        type: date
+        required: false
       - name: orario
         label: Orario
         type: string
