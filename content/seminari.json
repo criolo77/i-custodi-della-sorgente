@@ -1,13 +1,11 @@
 [
   {
-    "titolo": "Quaderno aperto",
-    "sottotitolo": "Laboratorio di scrittura e raccolta frammenti.",
-    "startDate": "2026-07-13",
-    "endDate": "2026-07-13",
-    "orario": "18:30",
-    "luogo": "Milano",
-    "descrizione": "Un incontro pratico per trasformare appunti sparsi in materiali condivisibili.",
-    "link": "https://example.com/seminari/quaderno-aperto",
-    "stato": "concluso"
+    "titolo": "Risveglia la Salute nel tuo Sangue",
+    "sottotitolo": "Residenziale di risveglio, trasformazione e liberazione",
+    "startDate": "2026-09-04",
+    "endDate": "2026-09-06",
+    "luogo": "Selva di Fasano (BR)",
+    "immagine": "/images/WhatsApp Image 2026-07-07 at 13.41.39.jpeg",
+    "stato": "aperto"
   }
 ]
