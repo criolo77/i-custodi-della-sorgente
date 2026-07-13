@@ -1944,32 +1944,35 @@ body.modal-open {
    BRAND LOGO IMAGE — sostituzione cerchi SVG con logo rose
    ============================================================ */
 .brand-mark-logo {
-  width: 42px;
-  height: 42px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 1.5px solid var(--gold);
   background: transparent;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform .3s ease;
+}
+.brand-mark-logo:hover {
+  transform: scale(1.04);
 }
 .brand-logo-img {
-  width: 38px;
-  height: 38px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 0 2px rgba(201,162,75,.2));
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.18));
 }
 /* footer: leggermente più piccolo */
 .footer-brand .brand-mark-logo {
-  width: 38px;
-  height: 38px;
+  width: 56px;
+  height: 56px;
 }
 .footer-brand .brand-logo-img {
-  width: 34px;
-  height: 34px;
+  width: 56px;
+  height: 56px;
 }
 
 /* ============================================================
