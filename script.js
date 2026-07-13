@@ -106,6 +106,33 @@
     });
   }
 
+  function formatDateRange(startDate, endDate) {
+    if (!startDate) return "";
+    var start = new Date(startDate + "T00:00:00");
+    if (Number.isNaN(start.getTime())) return "";
+    var end = endDate ? new Date(endDate + "T00:00:00") : null;
+
+    if (!end || Number.isNaN(end.getTime()) || end.getTime() === start.getTime()) {
+      return start.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+    }
+
+    var sameYear = start.getFullYear() === end.getFullYear();
+    var sameMonth = sameYear && start.getMonth() === end.getMonth();
+
+    if (sameMonth) {
+      var monthYear = start.toLocaleDateString("it-IT", { month: "long", year: "numeric" });
+      return start.getDate() + "\u2013" + end.getDate() + " " + monthYear;
+    }
+    if (sameYear) {
+      var startPart = start.toLocaleDateString("it-IT", { day: "numeric", month: "long" });
+      var endPart = end.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+      return startPart + " \u2013 " + endPart;
+    }
+    var startFull = start.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+    var endFull = end.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+    return startFull + " \u2013 " + endFull;
+  }
+
   function fetchJson(path) {
     return fetch(path, { cache: "no-store" }).then(function (response) {
       if (!response.ok) throw new Error("Impossibile caricare " + path);
@@ -118,18 +145,20 @@
     if (!root || !Array.isArray(items) || !items.length) return;
 
     root.innerHTML = items.map(function (item) {
-      var date = item.data ? new Date(item.data + "T00:00:00") : null;
+      var date = item.startDate ? new Date(item.startDate + "T00:00:00") : null;
       var day = date && !Number.isNaN(date.getTime()) ? String(date.getDate()).padStart(2, "0") : "--";
       var month = date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("it-IT", { month: "short" }).replace(".", "")
         : "";
+      var dateRange = formatDateRange(item.startDate, item.endDate);
+      var metaParts = [dateRange, item.luogo, item.orario].filter(Boolean);
 
       return '<div class="event-row">'
         + '<div class="event-date"><span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span></div>'
         + '<div class="event-info">'
         + '<h3>' + escapeHtml(item.titolo) + '</h3>'
         + '<p>' + escapeHtml(item.descrizione || item.sottotitolo || "") + '</p>'
-        + (item.luogo || item.orario ? '<p><strong>' + escapeHtml([item.luogo, item.orario].filter(Boolean).join(" · ")) + '</strong></p>' : "")
+        + (metaParts.length ? '<p><strong>' + escapeHtml(metaParts.join(" · ")) + '</strong></p>' : "")
         + '</div>'
         + '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>'
         + '</div>';

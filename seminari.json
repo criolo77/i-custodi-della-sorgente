@@ -1,0 +1,24 @@
+[
+  {
+    "titolo": "Pratiche di ascolto",
+    "sottotitolo": "Un seminario introduttivo sul silenzio come spazio di relazione.",
+    "startDate": "2026-09-19",
+    "endDate": "",
+    "orario": "10:00",
+    "luogo": "Online",
+    "descrizione": "Due ore di lavoro guidato con esercizi, letture brevi e confronto finale.",
+    "link": "https://example.com/seminari/pratiche-di-ascolto",
+    "stato": "in-programma"
+  },
+  {
+    "titolo": "Quaderno aperto",
+    "sottotitolo": "Laboratorio di scrittura e raccolta frammenti.",
+    "startDate": "2026-10-08",
+    "endDate": "",
+    "orario": "18:30",
+    "luogo": "Milano",
+    "descrizione": "Un incontro pratico per trasformare appunti sparsi in materiali condivisibili.",
+    "link": "https://example.com/seminari/quaderno-aperto",
+    "stato": "bozza"
+  }
+]
