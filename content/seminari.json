@@ -1,29 +1,13 @@
 [
   {
-    "titolo": "Pratiche di ascolto",
-    "sottotitolo": "Un seminario introduttivo sul silenzio come spazio di relazione.",
-    "data": "2026-09-19",
-    "orario": "10:00",
-    "luogo": "Online",
-    "descrizione": "Due ore di lavoro guidato con esercizi, letture brevi e confronto finale.",
-    "link": "https://example.com/seminari/pratiche-di-ascolto",
-    "stato": "concluso"
-  },
-  {
     "titolo": "Quaderno aperto",
     "sottotitolo": "Laboratorio di scrittura e raccolta frammenti.",
-    "data": "2026-10-08",
+    "startDate": "2026-07-13",
+    "endDate": "2026-07-13",
     "orario": "18:30",
     "luogo": "Milano",
     "descrizione": "Un incontro pratico per trasformare appunti sparsi in materiali condivisibili.",
     "link": "https://example.com/seminari/quaderno-aperto",
     "stato": "concluso"
-  },
-  {
-    "titolo": "riveglio del sangue",
-    "sottotitolo": "risveglia i tuoi diritti di sangue",
-    "data": "2026-09-04",
-    "luogo": "monopoli",
-    "stato": "aperto"
   }
 ]
