@@ -168,10 +168,16 @@
         actionHtml = '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>';
       }
 
+      var detailUrl = item.slug ? "seminario.html?slug=" + encodeURIComponent(item.slug) : "";
+      var dateBadge = '<span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span>';
+      var titleHtml = escapeHtml(item.titolo);
+
       return '<div class="event-row">'
-        + '<div class="event-date"><span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span></div>'
+        + (detailUrl
+          ? '<a class="event-date" href="' + escapeHtml(detailUrl) + '" aria-label="Vedi il seminario: ' + escapeHtml(item.titolo) + '">' + dateBadge + '</a>'
+          : '<div class="event-date">' + dateBadge + '</div>')
         + '<div class="event-info">'
-        + '<h3>' + escapeHtml(item.titolo) + '</h3>'
+        + '<h3>' + (detailUrl ? '<a href="' + escapeHtml(detailUrl) + '">' + titleHtml + '</a>' : titleHtml) + '</h3>'
         + '<p>' + escapeHtml(item.descrizione || item.sottotitolo || "") + '</p>'
         + (metaParts.length ? '<p><strong>' + escapeHtml(metaParts.join(" · ")) + '</strong></p>' : "")
         + '</div>'
