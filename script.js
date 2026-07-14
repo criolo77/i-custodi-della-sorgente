@@ -144,9 +144,21 @@
     var root = document.getElementById("seminariList");
     if (!root || !Array.isArray(items)) return;
 
-    var visibili = items.filter(function (item) {
-      return item.stato !== "bozza";
-    });
+    var ORDINE_STATO = { aperto: 0, prossimamente: 1, concluso: 2 };
+    var STATO_LABEL = { aperto: "Aperto", prossimamente: "Prossimamente", concluso: "Concluso" };
+
+    var visibili = items
+      .filter(function (item) { return item.stato !== "bozza"; })
+      .slice()
+      .sort(function (a, b) {
+        var pesoA = ORDINE_STATO.hasOwnProperty(a.stato) ? ORDINE_STATO[a.stato] : 99;
+        var pesoB = ORDINE_STATO.hasOwnProperty(b.stato) ? ORDINE_STATO[b.stato] : 99;
+        if (pesoA !== pesoB) return pesoA - pesoB;
+        var dataA = a.startDate ? new Date(a.startDate + "T00:00:00").getTime() : Infinity;
+        var dataB = b.startDate ? new Date(b.startDate + "T00:00:00").getTime() : Infinity;
+        return dataA - dataB;
+      });
+
     if (!visibili.length) return;
 
     root.innerHTML = visibili.map(function (item) {
@@ -158,20 +170,18 @@
       var dateRange = formatDateRange(item.startDate, item.endDate);
       var metaParts = [dateRange, item.luogo, item.orario].filter(Boolean);
 
-      var isConcluso = item.stato === "concluso";
-      var actionHtml;
-      if (isConcluso) {
-        actionHtml = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Concluso</button>';
-      } else if (item.link) {
-        actionHtml = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link) + '" target="_blank" rel="noopener">Iscriviti</a>';
-      } else {
-        actionHtml = '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>';
-      }
+      var statoLabel = STATO_LABEL.hasOwnProperty(item.stato) ? STATO_LABEL[item.stato] : STATO_LABEL.aperto;
+      var statoClasse = STATO_LABEL.hasOwnProperty(item.stato) ? item.stato : "aperto";
+      var badgeHtml = '<span class="status-badge is-' + escapeHtml(statoClasse) + '">' + escapeHtml(statoLabel) + '</span>';
 
       var effectiveSlug = (window.ContentEngine && window.ContentEngine.resolveSlug)
         ? window.ContentEngine.resolveSlug(item, {})
         : (item.slug || "");
       var detailUrl = effectiveSlug ? "seminario.html?slug=" + encodeURIComponent(effectiveSlug) : "";
+      var scopriHtml = detailUrl
+        ? '<a class="btn btn-outline-dark" href="' + escapeHtml(detailUrl) + '">Scopri</a>'
+        : '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Scopri</button>';
+
       var dateBadge = '<span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span>';
       var titleHtml = escapeHtml(item.titolo);
 
@@ -180,11 +190,12 @@
           ? '<a class="event-date" href="' + escapeHtml(detailUrl) + '" aria-label="Vedi il seminario: ' + escapeHtml(item.titolo) + '">' + dateBadge + '</a>'
           : '<div class="event-date">' + dateBadge + '</div>')
         + '<div class="event-info">'
+        + badgeHtml
         + '<h3>' + (detailUrl ? '<a href="' + escapeHtml(detailUrl) + '">' + titleHtml + '</a>' : titleHtml) + '</h3>'
         + '<p>' + escapeHtml(item.descrizione || item.sottotitolo || "") + '</p>'
         + (metaParts.length ? '<p><strong>' + escapeHtml(metaParts.join(" · ")) + '</strong></p>' : "")
         + '</div>'
-        + actionHtml
+        + scopriHtml
         + '</div>';
     }).join("");
   }

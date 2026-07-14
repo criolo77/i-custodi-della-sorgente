@@ -165,10 +165,11 @@
           ? '<p class="seminario-detail-subtitle">' + escapeHtml(item.sottotitolo) + '</p>'
           : "";
 
-        var isConcluso = item.stato === "concluso";
         var action;
-        if (isConcluso) {
-          action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Concluso</button>';
+        if (item.stato === "prossimamente") {
+          action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">A breve le iscrizioni</button>';
+        } else if (item.stato === "concluso") {
+          action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Seminario concluso</button>';
         } else if (item.link) {
           action = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link) + '" target="_blank" rel="noopener">Iscriviti</a>';
         } else {
