@@ -78,12 +78,32 @@
 
   // Legge lo slug dalla querystring (?slug=...); in assenza, ricade sul
   // primo elemento disponibile (stesso comportamento gia' in uso).
-  function getRequestedSlug(items, slugField) {
-    var field = slugField || "slug";
+  // Genera uno slug leggibile a partire da un testo (tipicamente il titolo):
+  // minuscolo, senza accenti, spazi sostituiti da trattini.
+  function slugify(value) {
+    return String(value == null ? "" : value)
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  // Restituisce lo slug "effettivo" di un contenuto: quello scritto esplicitamente
+  // nel campo slug, oppure — se assente — quello generato automaticamente dal
+  // campo titolo. Questo rende il campo slug facoltativo senza rompere i link.
+  function resolveSlug(item, options) {
+    var opts = options || {};
+    var slugField = opts.slugField || "slug";
+    var titleField = opts.titleField || "titolo";
+    return (item && item[slugField]) || slugify(item && item[titleField]);
+  }
+
+  function getRequestedSlug(items, slugField, titleField) {
     var params = new URLSearchParams(global.location.search);
     var slug = params.get("slug");
     if (slug) return slug;
-    return items[0] && items[0][field] ? items[0][field] : "";
+    return items[0] ? resolveSlug(items[0], { slugField: slugField, titleField: titleField }) : "";
   }
 
   // ------------------------------------------------------------
@@ -121,8 +141,11 @@
           config.renderNotFound(root);
           return;
         }
-        var slug = getRequestedSlug(items, slugField);
-        var item = items.find(function (entry) { return entry[slugField] === slug; });
+        var titleField = config.titleField || "titolo";
+        var slug = getRequestedSlug(items, slugField, titleField);
+        var item = items.find(function (entry) {
+          return resolveSlug(entry, { slugField: slugField, titleField: titleField }) === slug;
+        });
 
         if (item && isVisible(item)) {
           if (config.getDocumentTitle) document.title = config.getDocumentTitle(item);
@@ -143,6 +166,8 @@
     escapeHtml: escapeHtml,
     formatDate: formatDate,
     formatDateRange: formatDateRange,
+    slugify: slugify,
+    resolveSlug: resolveSlug,
     getRequestedSlug: getRequestedSlug,
     initDetailPage: initDetailPage
   };

@@ -168,7 +168,10 @@
         actionHtml = '<button class="btn btn-outline-dark" type="button" data-open-contact>Iscriviti</button>';
       }
 
-      var detailUrl = item.slug ? "seminario.html?slug=" + encodeURIComponent(item.slug) : "";
+      var effectiveSlug = (window.ContentEngine && window.ContentEngine.resolveSlug)
+        ? window.ContentEngine.resolveSlug(item, {})
+        : (item.slug || "");
+      var detailUrl = effectiveSlug ? "seminario.html?slug=" + encodeURIComponent(effectiveSlug) : "";
       var dateBadge = '<span class="day">' + escapeHtml(day) + '</span><span class="month">' + escapeHtml(month) + '</span>';
       var titleHtml = escapeHtml(item.titolo);
 
