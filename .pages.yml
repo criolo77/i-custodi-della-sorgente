@@ -72,6 +72,8 @@ content:
           values:
             - value: aperto
               label: Aperto
+            - value: prossimamente
+              label: Prossimamente
             - value: concluso
               label: Concluso
             - value: bozza
@@ -154,3 +156,4 @@ content:
       - name: metaDescription
         label: Meta Description
         type: text
+
