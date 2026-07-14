@@ -165,15 +165,14 @@
           ? '<p class="seminario-detail-subtitle">' + escapeHtml(item.sottotitolo) + '</p>'
           : "";
 
+        var statoSeminario = (item.stato || "").toString().trim().toLowerCase();
         var action;
-        if (item.stato === "prossimamente") {
+        if (statoSeminario === "prossimamente") {
           action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">A breve le iscrizioni</button>';
-        } else if (item.stato === "concluso") {
+        } else if (statoSeminario === "concluso") {
           action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Seminario concluso</button>';
-        } else if (item.link) {
-          action = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link) + '" target="_blank" rel="noopener">Iscriviti</a>';
         } else {
-          action = '<p class="seminario-link-note">Iscrizioni non ancora disponibili.</p>';
+          action = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link || "#") + '" target="_blank" rel="noopener">Iscriviti</a>';
         }
 
         document.title = title + " - Custodi della Sorgente";
@@ -203,7 +202,7 @@
       ContentEngine.initDetailPage({
         dataUrl: "content/seminari.json",
         rootId: "seminarioDetail",
-        isVisible: function (item) { return item.stato !== "bozza"; },
+        isVisible: function (item) { return (item.stato || "").toString().trim().toLowerCase() !== "bozza"; },
         render: renderSeminario,
         renderNotFound: renderNotFound
       });

@@ -147,12 +147,18 @@
     var ORDINE_STATO = { aperto: 0, prossimamente: 1, concluso: 2 };
     var STATO_LABEL = { aperto: "Aperto", prossimamente: "Prossimamente", concluso: "Concluso" };
 
+    function statoNormalizzato(item) {
+      return (item.stato || "").toString().trim().toLowerCase();
+    }
+
     var visibili = items
-      .filter(function (item) { return item.stato !== "bozza"; })
+      .filter(function (item) { return statoNormalizzato(item) !== "bozza"; })
       .slice()
       .sort(function (a, b) {
-        var pesoA = ORDINE_STATO.hasOwnProperty(a.stato) ? ORDINE_STATO[a.stato] : 99;
-        var pesoB = ORDINE_STATO.hasOwnProperty(b.stato) ? ORDINE_STATO[b.stato] : 99;
+        var statoA = statoNormalizzato(a);
+        var statoB = statoNormalizzato(b);
+        var pesoA = ORDINE_STATO.hasOwnProperty(statoA) ? ORDINE_STATO[statoA] : 99;
+        var pesoB = ORDINE_STATO.hasOwnProperty(statoB) ? ORDINE_STATO[statoB] : 99;
         if (pesoA !== pesoB) return pesoA - pesoB;
         var dataA = a.startDate ? new Date(a.startDate + "T00:00:00").getTime() : Infinity;
         var dataB = b.startDate ? new Date(b.startDate + "T00:00:00").getTime() : Infinity;
@@ -170,8 +176,9 @@
       var dateRange = formatDateRange(item.startDate, item.endDate);
       var metaParts = [dateRange, item.luogo, item.orario].filter(Boolean);
 
-      var statoLabel = STATO_LABEL.hasOwnProperty(item.stato) ? STATO_LABEL[item.stato] : STATO_LABEL.aperto;
-      var statoClasse = STATO_LABEL.hasOwnProperty(item.stato) ? item.stato : "aperto";
+      var statoItem = statoNormalizzato(item);
+      var statoLabel = STATO_LABEL.hasOwnProperty(statoItem) ? STATO_LABEL[statoItem] : STATO_LABEL.aperto;
+      var statoClasse = STATO_LABEL.hasOwnProperty(statoItem) ? statoItem : "aperto";
       var badgeHtml = '<span class="status-badge is-' + escapeHtml(statoClasse) + '">' + escapeHtml(statoLabel) + '</span>';
 
       var effectiveSlug = (window.ContentEngine && window.ContentEngine.resolveSlug)
