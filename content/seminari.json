@@ -1,6 +1,7 @@
 [
   {
     "titolo": "Risveglia la Salute nel tuo Sangue",
+    "slug": "risveglia-salute-sangue",
     "sottotitolo": "Residenziale di risveglio, trasformazione e liberazione",
     "startDate": "2026-09-04",
     "endDate": "2026-09-06",
@@ -10,6 +11,7 @@
   },
   {
     "titolo": "Il Risveglio del Sacro Raggio di Pace",
+    "slug": "sacro-raggio-pace",
     "startDate": "2025-09-05",
     "endDate": "2025-09-07",
     "luogo": "Selva di Fasano (BR)",
@@ -19,8 +21,10 @@
   },
   {
     "titolo": "Il viaggio della guarigione",
+    "slug": "viaggio-guarigione",
     "sottotitolo": "Tradizioni che parlano al presente",
     "startDate": "2026-02-08",
+    "endDate": "2026-07-14",
     "luogo": "Milano",
     "descrizione": "Un percorso tra scienza e spiritualità per scoprire i ponti invisibili tra culture di cura e guarigione.  Un seminario per esplorare e confrontare le tradizioni terapeutiche della Medicina Tradizionale Cinese, Ayurvedica, Sciamanica e Allopatica. ",
     "stato": "concluso"
