@@ -38,6 +38,7 @@ content:
         label: Slug
         type: string
         required: true
+        description: "Identificativo univoco usato nell'indirizzo della pagina del seminario (es. seminario.html?slug=nome-seminario). Usa solo lettere minuscole, numeri e trattini, senza spazi né accenti (es. \"ritiro-di-settembre\"). Campo obbligatorio: senza slug il seminario non ha una pagina di dettaglio raggiungibile."
       - name: sottotitolo
         label: Sottotitolo
         type: string
@@ -153,3 +154,4 @@ content:
       - name: metaDescription
         label: Meta Description
         type: text
+
