@@ -1,6 +1,7 @@
 [
   {
     "titolo": "Pratiche di ascolto",
+    "slug": "pratiche-di-ascolto",
     "sottotitolo": "Un seminario introduttivo sul silenzio come spazio di relazione.",
     "startDate": "2026-09-19",
     "endDate": "",
@@ -12,6 +13,7 @@
   },
   {
     "titolo": "Quaderno aperto",
+    "slug": "quaderno-aperto",
     "sottotitolo": "Laboratorio di scrittura e raccolta frammenti.",
     "startDate": "2026-10-08",
     "endDate": "",
