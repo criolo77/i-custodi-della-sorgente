@@ -141,6 +141,7 @@
     </div>
   </footer>
 
+  <script src="content-engine.js"></script>
   <script>
     (function () {
       "use strict";
@@ -148,53 +149,10 @@
       var yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      function escapeHtml(value) {
-        return String(value == null ? "" : value)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
+      var escapeHtml = ContentEngine.escapeHtml;
+      var formatDateRange = ContentEngine.formatDateRange;
 
-      function formatDateRange(startDate, endDate) {
-        if (!startDate) return "";
-        var start = new Date(startDate + "T00:00:00");
-        if (Number.isNaN(start.getTime())) return "";
-        var end = endDate ? new Date(endDate + "T00:00:00") : null;
-
-        if (!end || Number.isNaN(end.getTime()) || end.getTime() === start.getTime()) {
-          return start.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
-        }
-
-        var sameYear = start.getFullYear() === end.getFullYear();
-        var sameMonth = sameYear && start.getMonth() === end.getMonth();
-
-        if (sameMonth) {
-          var monthYear = start.toLocaleDateString("it-IT", { month: "long", year: "numeric" });
-          return start.getDate() + "\u2013" + end.getDate() + " " + monthYear;
-        }
-        if (sameYear) {
-          var startPart = start.toLocaleDateString("it-IT", { day: "numeric", month: "long" });
-          var endPart = end.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
-          return startPart + " \u2013 " + endPart;
-        }
-        var startFull = start.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
-        var endFull = end.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
-        return startFull + " \u2013 " + endFull;
-      }
-
-      function getRequestedSlug(items) {
-        var params = new URLSearchParams(window.location.search);
-        var slug = params.get("slug");
-        if (slug) return slug;
-        return items[0] && items[0].slug ? items[0].slug : "";
-      }
-
-      function renderSeminario(item) {
-        var root = document.getElementById("seminarioDetail");
-        if (!root) return;
-
+      function renderSeminario(item, root) {
         var title = item.titolo || "Seminario della Sorgente";
         var cover = item.immagine
           ? '<img src="' + escapeHtml(item.immagine) + '" alt="' + escapeHtml(title) + '">'
@@ -232,9 +190,7 @@
           + '</div>';
       }
 
-      function renderNotFound() {
-        var root = document.getElementById("seminarioDetail");
-        if (!root) return;
+      function renderNotFound(root) {
         root.innerHTML = '<div class="seminario-detail-body">'
           + '<span class="eyebrow">Seminari della Sorgente</span>'
           + '<h1 class="seminario-detail-title">Seminario non trovato</h1>'
@@ -243,22 +199,13 @@
           + '</div>';
       }
 
-      fetch("content/seminari.json", { cache: "no-store" })
-        .then(function (response) {
-          if (!response.ok) throw new Error("Impossibile caricare i seminari");
-          return response.json();
-        })
-        .then(function (items) {
-          if (!Array.isArray(items) || !items.length) {
-            renderNotFound();
-            return;
-          }
-          var slug = getRequestedSlug(items);
-          var item = items.find(function (entry) { return entry.slug === slug; });
-          if (item && item.stato !== "bozza") renderSeminario(item);
-          else renderNotFound();
-        })
-        .catch(renderNotFound);
+      ContentEngine.initDetailPage({
+        dataUrl: "content/seminari.json",
+        rootId: "seminarioDetail",
+        isVisible: function (item) { return item.stato !== "bozza"; },
+        render: renderSeminario,
+        renderNotFound: renderNotFound
+      });
     })();
   </script>
 </body>

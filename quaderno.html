@@ -129,6 +129,7 @@
     </div>
   </footer>
 
+  <script src="content-engine.js"></script>
   <script>
     (function () {
       "use strict";
@@ -136,37 +137,10 @@
       var yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      function escapeHtml(value) {
-        return String(value == null ? "" : value)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
+      var escapeHtml = ContentEngine.escapeHtml;
+      var formatDate = ContentEngine.formatDate;
 
-      function formatDate(value) {
-        if (!value) return "";
-        var date = new Date(value + "T00:00:00");
-        if (Number.isNaN(date.getTime())) return value;
-        return date.toLocaleDateString("it-IT", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric"
-        });
-      }
-
-      function getRequestedSlug(items) {
-        var params = new URLSearchParams(window.location.search);
-        var slug = params.get("slug");
-        if (slug) return slug;
-        return items[0] && items[0].slug ? items[0].slug : "";
-      }
-
-      function renderQuaderno(item) {
-        var root = document.getElementById("quadernoDetail");
-        if (!root) return;
-
+      function renderQuaderno(item, root) {
         var title = item.titolo || "Quaderno della Sorgente";
         var cover = item.copertina
           ? '<img src="' + escapeHtml(item.copertina) + '" alt="' + escapeHtml(title) + '">'
@@ -180,7 +154,7 @@
         root.innerHTML = '<div class="quaderno-detail-cover">' + cover + '</div>'
           + '<div class="quaderno-detail-body">'
           + '<span class="eyebrow">Quaderni della Sorgente</span>'
-          + '<div class="quaderno-detail-meta">' + escapeHtml([item.autore || "Custodi della Sorgente", formatDate(item.data)].filter(Boolean).join(" · ")) + '</div>'
+          + '<div class="quaderno-detail-meta">' + escapeHtml([item.autore || "Custodi della Sorgente", formatDate(item.data, { day: "2-digit", month: "long", year: "numeric" })].filter(Boolean).join(" · ")) + '</div>'
           + '<h1 class="quaderno-detail-title">' + escapeHtml(title) + '</h1>'
           + '<p class="quaderno-detail-text">' + escapeHtml(text) + '</p>'
           + '<div class="quaderno-detail-actions">'
@@ -190,9 +164,7 @@
           + '</div>';
       }
 
-      function renderNotFound() {
-        var root = document.getElementById("quadernoDetail");
-        if (!root) return;
+      function renderNotFound(root) {
         root.innerHTML = '<div class="quaderno-detail-body">'
           + '<span class="eyebrow">Quaderni della Sorgente</span>'
           + '<h1 class="quaderno-detail-title">Quaderno non trovato</h1>'
@@ -201,22 +173,12 @@
           + '</div>';
       }
 
-      fetch("content/quaderni.json", { cache: "no-store" })
-        .then(function (response) {
-          if (!response.ok) throw new Error("Impossibile caricare i quaderni");
-          return response.json();
-        })
-        .then(function (items) {
-          if (!Array.isArray(items) || !items.length) {
-            renderNotFound();
-            return;
-          }
-          var slug = getRequestedSlug(items);
-          var item = items.find(function (entry) { return entry.slug === slug; });
-          if (item) renderQuaderno(item);
-          else renderNotFound();
-        })
-        .catch(renderNotFound);
+      ContentEngine.initDetailPage({
+        dataUrl: "content/quaderni.json",
+        rootId: "quadernoDetail",
+        render: renderQuaderno,
+        renderNotFound: renderNotFound
+      });
     })();
   </script>
 </body>
