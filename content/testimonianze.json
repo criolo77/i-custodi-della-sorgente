@@ -1,18 +1,14 @@
 [
   {
     "nome": "Elena R.",
-    "ruolo": "Partecipante al percorso",
-    "testo": "Un ascolto raro, capace di aprire domande nuove senza forzare risposte.",
-    "luogo": "Bologna",
-    "data": "2026-03-14",
-    "inEvidenza": true
+    "testo": "Un ascolto raro, capace di aprire domande nuove senza forzare risposte."
   },
   {
     "nome": "Marco L.",
-    "ruolo": "Educatore",
-    "testo": "I materiali mi hanno aiutato a portare il lavoro sul silenzio dentro un gruppo molto concreto.",
-    "luogo": "Torino",
-    "data": "2026-04-02",
-    "inEvidenza": false
+    "testo": "I materiali mi hanno aiutato a portare il lavoro sul silenzio dentro un gruppo molto concreto."
+  },
+  {
+    "nome": "Luce ",
+    "testo": "Un risveglio delle mie energie pure di Sangue e dei miei Antenati"
   }
 ]
