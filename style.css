@@ -821,18 +821,27 @@ h1, h2, h3, h4 {
 .status-badge {
   display: inline-block;
   font-family: var(--ff-body);
-  font-size: .68rem;
-  letter-spacing: .08em;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .07em;
   text-transform: uppercase;
-  padding: .25rem .65rem;
+  padding: .32rem .85rem;
   border-radius: 999px;
   border: 1px solid var(--gold);
   color: var(--gold-deep);
-  background: transparent;
-  margin-bottom: .5rem;
+  background: rgba(201, 162, 75, .12);
+  margin-bottom: .85rem;
 }
-.status-badge.is-prossimamente { border-color: var(--gold-soft); color: var(--gold-deep); }
-.status-badge.is-concluso { border-color: var(--line); color: var(--ink-soft); }
+.status-badge.is-prossimamente {
+  border-color: rgba(110, 134, 163, .55);
+  color: #3E5266;
+  background: rgba(110, 134, 163, .14);
+}
+.status-badge.is-concluso {
+  border-color: rgba(92, 74, 76, .3);
+  color: var(--ink-soft);
+  background: rgba(92, 74, 76, .08);
+}
 .event-row .btn { padding: .75rem 1.4rem; font-size: .82rem; }
 .event-row .btn.is-disabled {
   opacity: .5;

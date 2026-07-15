@@ -168,13 +168,15 @@
         var statoSeminario = (item.stato || "").toString().trim().toLowerCase();
         var action;
         if (statoSeminario === "prossimamente") {
-          action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">A breve le iscrizioni</button>';
+          action = '<button class="btn btn-gold is-disabled" type="button" disabled aria-disabled="true">A breve le iscrizioni</button>';
         } else if (statoSeminario === "concluso") {
-          action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Seminario concluso</button>';
+          action = '<button class="btn btn-gold is-disabled" type="button" disabled aria-disabled="true">Seminario concluso</button>';
         } else {
           // Riusa esattamente lo stesso popup di iscrizione gia' presente in Home
           // (stessa funzione openModal() in script.js): nessun sistema separato.
-          action = '<a class="btn btn-outline-dark" href="index.html?iscriviti=1#eventi">Iscriviti</a>';
+          // btn-gold: stile primario gia' esistente nel sito, per rendere
+          // "Iscriviti" l'azione principale della pagina.
+          action = '<a class="btn btn-gold" href="index.html?iscriviti=1#eventi">Iscriviti</a>';
         }
 
         document.title = title + " - Custodi della Sorgente";
