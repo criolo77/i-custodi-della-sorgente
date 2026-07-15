@@ -90,6 +90,11 @@ content:
         label: Titolo
         type: string
         required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: false
+        description: "Identificativo usato nell'indirizzo della pagina del frammento (es. frammento.html?slug=nome-frammento). Puoi lasciarlo vuoto: viene generato automaticamente dal Titolo."
       - name: data
         label: Data
         type: date
@@ -156,4 +161,5 @@ content:
       - name: metaDescription
         label: Meta Description
         type: text
+
 
