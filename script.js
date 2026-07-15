@@ -213,7 +213,8 @@
     var layoutClasses = ["frammenti-tall", "frammenti-wide", "", "", "frammenti-tall", "frammenti-wide"];
 
     root.innerHTML = items.slice(0, 6).map(function (item, index) {
-      var image = item.immagine || item.image || item.foto || "";
+      var galleria = Array.isArray(item.galleria) ? item.galleria.filter(Boolean) : [];
+      var image = galleria[0] || "";
       var layout = layoutClasses[index % layoutClasses.length];
       var content = image
         ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">'
@@ -221,7 +222,8 @@
           + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
           + '<span>' + escapeHtml(item.titolo || "Frammento") + '</span>'
           + '</div>';
-      return '<div class="frammenti-item ' + layout + '" data-index="' + index + '">' + content + '</div>';
+      var galleriaAttr = escapeHtml(JSON.stringify(galleria));
+      return '<div class="frammenti-item ' + layout + '" data-index="' + index + '" data-titolo="' + escapeHtml(item.titolo || "") + '" data-gallery="' + galleriaAttr + '">' + content + '</div>';
     }).join("");
   }
 
@@ -419,17 +421,36 @@
     var framContent  = document.getElementById('frammentilightboxContent');
     var framPrev     = document.getElementById('frammentilightboxPrev');
     var framNext     = document.getElementById('frammentilightboxNext');
-    var framCurrent  = 0;
+    var framItemIndex  = 0; // quale Frammento e' aperto
+    var framImageIndex = 0; // quale immagine, all'interno della sua galleria
 
     if (!framItems.length || !framLightbox) return;
 
-  function framOpen(idx) {
+    function framGallery(item) {
+      try {
+        var data = JSON.parse(item.getAttribute('data-gallery') || '[]');
+        return Array.isArray(data) ? data.filter(Boolean) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+  function framOpen(itemIdx, imageIdx) {
     if (!framLightbox) return;
-    framCurrent = (idx + framItems.length) % framItems.length;
+    framItemIndex = (itemIdx + framItems.length) % framItems.length;
+    framImageIndex = imageIdx || 0;
     framRender();
     framLightbox.hidden = false;
     document.body.classList.add('modal-open');
     if (framClose) framClose.focus();
+  }
+
+  function framShiftImage(delta) {
+    var item = framItems[framItemIndex];
+    var gallery = item ? framGallery(item) : [];
+    if (!gallery.length) return;
+    framImageIndex = (framImageIndex + delta + gallery.length) % gallery.length;
+    framRender();
   }
 
   function framClose_fn() {
@@ -440,12 +461,14 @@
 
   function framRender() {
     if (!framContent) return;
-    var item = framItems[framCurrent];
-    var img  = item ? item.querySelector('img') : null;
-    if (img) {
-      framContent.innerHTML = '<img src="' + img.src + '" alt="' + (img.alt || '') + '">';
+    var item = framItems[framItemIndex];
+    var gallery = item ? framGallery(item) : [];
+    var titolo = item ? (item.getAttribute('data-titolo') || '') : '';
+    var src = gallery[framImageIndex];
+    if (src) {
+      framContent.innerHTML = '<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(titolo) + '">';
     } else {
-      // placeholder
+      // placeholder: mostrato solo se la galleria di questo Frammento e' realmente vuota
       framContent.innerHTML = '<div class="frammenti-placeholder frammenti-placeholder-lb">'
         + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
         + '<span>Foto in arrivo</span></div>';
@@ -453,24 +476,24 @@
   }
 
   framItems.forEach(function(item, i) {
-    item.addEventListener('click', function() { framOpen(i); });
+    item.addEventListener('click', function() { framOpen(i, 0); });
     item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
     item.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); framOpen(i); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); framOpen(i, 0); }
     });
   });
 
   if (framClose)   framClose.addEventListener('click', framClose_fn);
   if (framBackdrop) framBackdrop.addEventListener('click', framClose_fn);
-  if (framPrev)    framPrev.addEventListener('click', function() { framOpen(framCurrent - 1); });
-  if (framNext)    framNext.addEventListener('click', function() { framOpen(framCurrent + 1); });
+  if (framPrev)    framPrev.addEventListener('click', function() { framShiftImage(-1); });
+  if (framNext)    framNext.addEventListener('click', function() { framShiftImage(1); });
 
     document.addEventListener('keydown', function(e) {
       if (!framLightbox || framLightbox.hidden) return;
       if (e.key === 'Escape')      framClose_fn();
-      if (e.key === 'ArrowLeft')   framOpen(framCurrent - 1);
-      if (e.key === 'ArrowRight')  framOpen(framCurrent + 1);
+      if (e.key === 'ArrowLeft')   framShiftImage(-1);
+      if (e.key === 'ArrowRight')  framShiftImage(1);
     });
   }
 
