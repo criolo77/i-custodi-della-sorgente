@@ -381,6 +381,13 @@
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
   if (backdrop) backdrop.addEventListener("click", closeModal);
 
+  // Apre automaticamente questo stesso popup quando si arriva da un'altra pagina
+  // (es. seminario.html) con l'intento esplicito di iscriversi: ?iscriviti=1
+  // Riusa esattamente la stessa funzione openModal(), nessun sistema duplicato.
+  if (modal && new URLSearchParams(window.location.search).get("iscriviti")) {
+    openModal();
+  }
+
   // close on Escape
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal && !modal.hidden) closeModal();

@@ -172,7 +172,9 @@
         } else if (statoSeminario === "concluso") {
           action = '<button class="btn btn-outline-dark is-disabled" type="button" disabled aria-disabled="true">Seminario concluso</button>';
         } else {
-          action = '<a class="btn btn-outline-dark" href="' + escapeHtml(item.link || "#") + '" target="_blank" rel="noopener">Iscriviti</a>';
+          // Riusa esattamente lo stesso popup di iscrizione gia' presente in Home
+          // (stessa funzione openModal() in script.js): nessun sistema separato.
+          action = '<a class="btn btn-outline-dark" href="index.html?iscriviti=1#eventi">Iscriviti</a>';
         }
 
         document.title = title + " - Custodi della Sorgente";
