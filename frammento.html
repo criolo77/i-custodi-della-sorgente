@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frammento - Custodi della Sorgente</title>
+  <meta name="description" content="Un Frammento di Cammino di Custodi della Sorgente.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .frammento-template {
+      background: var(--white);
+      padding-top: 8rem;
+    }
+    .frammento-detail {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .frammento-detail-title {
+      margin: .6rem 0 .4rem;
+    }
+    .frammento-detail-meta {
+      color: var(--gold-deep);
+      font-size: .92rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .frammento-detail-text {
+      color: var(--ink-soft);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin: 1.5rem 0 2.2rem;
+      white-space: pre-line;
+    }
+    .frammento-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .frammento-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .frammento-gallery-empty {
+      color: var(--ink-soft);
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .frammento-detail-actions {
+      margin-top: 2.2rem;
+    }
+    @media (max-width: 640px) {
+      .frammento-gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .frammento-gallery img { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header scrolled">
+    <div class="container nav">
+      <a href="index.html#top" class="brand">
+        <span class="brand-mark brand-mark-logo">
+          <img src="images/logo-sorgente.png" alt="Logo Custodi della Sorgente" class="brand-logo-img">
+        </span>
+        Custodi <em>della Sorgente</em>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigazione principale">
+        <a href="index.html#eventi">Seminari</a>
+        <a href="index.html#frammenti">Frammenti</a>
+        <a href="index.html#quaderni">Quaderni</a>
+        <a href="index.html#testimonianze">Le Voci</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section frammento-template">
+      <div class="container">
+        <article class="frammento-detail" id="frammentoDetail" aria-live="polite">
+          <span class="eyebrow">Frammenti di Cammino</span>
+          <h1 class="frammento-detail-title">Caricamento...</h1>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Realizzato con cura, respiro dopo respiro.</span>
+        <span>© <span id="year"></span> Custodi della Sorgente.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="content-engine.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      var escapeHtml = ContentEngine.escapeHtml;
+      var formatDate = ContentEngine.formatDate;
+
+      function renderFrammento(item, root) {
+        var title = item.titolo || "Frammento di Cammino";
+        var galleria = Array.isArray(item.galleria) ? item.galleria.filter(Boolean) : [];
+
+        var metaParts = [formatDate(item.data, { day: "numeric", month: "long", year: "numeric" }), item.luogo].filter(Boolean);
+
+        var galleryHtml = galleria.length
+          ? '<div class="frammento-gallery">' + galleria.map(function (src) {
+              return '<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(title) + '">';
+            }).join("") + '</div>'
+          : '<div class="frammento-gallery-empty">'
+            + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
+            + '<p>Foto in arrivo</p>'
+            + '</div>';
+
+        document.title = title + " - Custodi della Sorgente";
+        root.innerHTML = '<span class="eyebrow">Frammenti di Cammino</span>'
+          + (metaParts.length ? '<div class="frammento-detail-meta">' + escapeHtml(metaParts.join(" · ")) + '</div>' : "")
+          + '<h1 class="frammento-detail-title">' + escapeHtml(title) + '</h1>'
+          + '<p class="frammento-detail-text">' + escapeHtml(item.testo || "") + '</p>'
+          + galleryHtml
+          + '<div class="frammento-detail-actions"><a class="btn btn-outline-dark" href="frammenti.html">Torna all\'archivio</a></div>';
+      }
+
+      function renderNotFound(root) {
+        root.innerHTML = '<span class="eyebrow">Frammenti di Cammino</span>'
+          + '<h1 class="frammento-detail-title">Frammento non trovato</h1>'
+          + '<p class="frammento-detail-text">Il frammento richiesto non e presente nei contenuti pubblicati.</p>'
+          + '<div class="frammento-detail-actions"><a class="btn btn-outline-dark" href="frammenti.html">Torna all\'archivio</a></div>';
+      }
+
+      ContentEngine.initDetailPage({
+        dataUrl: "content/frammenti.json",
+        rootId: "frammentoDetail",
+        render: renderFrammento,
+        renderNotFound: renderNotFound
+      });
+    })();
+  </script>
+</body>
+</html>

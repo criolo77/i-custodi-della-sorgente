@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frammenti di Cammino - Custodi della Sorgente</title>
+  <meta name="description" content="L'archivio completo dei Frammenti di Cammino di Custodi della Sorgente.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .frammenti-archivio {
+      background: var(--white);
+      padding-top: 8rem;
+    }
+    .frammenti-archivio-intro {
+      max-width: 640px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+    .frammenti-archivio-intro h1 {
+      margin: .6rem 0 .8rem;
+    }
+    .frammenti-archivio-intro p {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+    .frammenti-archivio .frammenti-grid {
+      grid-auto-rows: 220px;
+    }
+    .frammenti-archivio a.frammenti-item {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+    .frammenti-empty {
+      text-align: center;
+      color: var(--ink-soft);
+      padding: 3rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header scrolled">
+    <div class="container nav">
+      <a href="index.html#top" class="brand">
+        <span class="brand-mark brand-mark-logo">
+          <img src="images/logo-sorgente.png" alt="Logo Custodi della Sorgente" class="brand-logo-img">
+        </span>
+        Custodi <em>della Sorgente</em>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigazione principale">
+        <a href="index.html#eventi">Seminari</a>
+        <a href="index.html#frammenti">Frammenti</a>
+        <a href="index.html#quaderni">Quaderni</a>
+        <a href="index.html#testimonianze">Le Voci</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section frammenti-archivio">
+      <div class="container">
+        <div class="frammenti-archivio-intro">
+          <span class="eyebrow">Frammenti di Cammino</span>
+          <h1>Archivio completo</h1>
+          <p>Ogni istante custodito lungo il Cammino, raccolto qui nella sua interezza.</p>
+        </div>
+        <div class="frammenti-grid" id="frammentiArchivioGrid" aria-live="polite">
+          <div class="frammenti-empty">Caricamento dei Frammenti...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Realizzato con cura, respiro dopo respiro.</span>
+        <span>© <span id="year"></span> Custodi della Sorgente.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="content-engine.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      var escapeHtml = ContentEngine.escapeHtml;
+      var resolveSlug = ContentEngine.resolveSlug;
+
+      function renderArchivio(items) {
+        var root = document.getElementById("frammentiArchivioGrid");
+        if (!root) return;
+
+        var visibili = items.filter(function (item) { return item && item.titolo; });
+
+        if (!visibili.length) {
+          root.innerHTML = '<div class="frammenti-empty">Nessun Frammento pubblicato al momento.</div>';
+          return;
+        }
+
+        root.innerHTML = visibili.map(function (item, index) {
+          var galleria = Array.isArray(item.galleria) ? item.galleria.filter(Boolean) : [];
+          var image = galleria[0] || "";
+          var slug = resolveSlug(item, {});
+          var href = "frammento.html?slug=" + encodeURIComponent(slug);
+          var content = image
+            ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">'
+            : '<div class="frammenti-placeholder">'
+              + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
+              + '<span>' + escapeHtml(item.titolo || "Frammento") + '</span>'
+              + '</div>';
+          return '<a class="frammenti-item" href="' + escapeHtml(href) + '" data-index="' + index + '">' + content + '</a>';
+        }).join("");
+      }
+
+      fetch("content/frammenti.json", { cache: "no-store" })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Impossibile caricare i frammenti");
+          return response.json();
+        })
+        .then(renderArchivio)
+        .catch(function () {
+          var root = document.getElementById("frammentiArchivioGrid");
+          if (root) root.innerHTML = '<div class="frammenti-empty">Non è stato possibile caricare i Frammenti in questo momento.</div>';
+        });
+    })();
+  </script>
+</body>
+</html>
