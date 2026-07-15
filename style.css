@@ -823,13 +823,15 @@ h1, h2, h3, h4 {
   font-family: var(--ff-body);
   font-size: .74rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: .07em;
   text-transform: uppercase;
-  padding: .32rem .85rem;
+  padding: .4rem 1rem;
   border-radius: 999px;
-  border: 1px solid var(--gold);
+  border: 1.5px solid var(--gold);
   color: var(--gold-deep);
   background: rgba(201, 162, 75, .12);
+  box-shadow: 0 1px 3px rgba(42, 26, 28, .08);
   margin-bottom: .85rem;
 }
 .status-badge.is-prossimamente {

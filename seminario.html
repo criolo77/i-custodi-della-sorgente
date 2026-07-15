@@ -176,7 +176,7 @@
           // (stessa funzione openModal() in script.js): nessun sistema separato.
           // btn-gold: stile primario gia' esistente nel sito, per rendere
           // "Iscriviti" l'azione principale della pagina.
-          action = '<a class="btn btn-gold" href="index.html?iscriviti=1#eventi">Iscriviti</a>';
+          action = '<a class="btn btn-gold" href="index.html?iscriviti=1&amp;seminario=' + encodeURIComponent(title) + '#eventi">Iscriviti</a>';
         }
 
         document.title = title + " - Custodi della Sorgente";

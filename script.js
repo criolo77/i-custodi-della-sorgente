@@ -162,6 +162,9 @@
         if (pesoA !== pesoB) return pesoA - pesoB;
         var dataA = a.startDate ? new Date(a.startDate + "T00:00:00").getTime() : Infinity;
         var dataB = b.startDate ? new Date(b.startDate + "T00:00:00").getTime() : Infinity;
+        // "concluso": dal piu' recente al piu' vecchio (decrescente).
+        // "aperto"/"prossimamente": dal piu' vicino al piu' lontano (crescente).
+        if (statoA === "concluso") return dataB - dataA;
         return dataA - dataB;
       });
 
@@ -386,9 +389,26 @@
   // Apre automaticamente questo stesso popup quando si arriva da un'altra pagina
   // (es. seminario.html) con l'intento esplicito di iscriversi: ?iscriviti=1
   // Riusa esattamente la stessa funzione openModal(), nessun sistema duplicato.
-  if (modal && new URLSearchParams(window.location.search).get("iscriviti")) {
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    if (!modal || !params.get("iscriviti")) return;
+
+    var titoloSeminario = params.get("seminario");
+    if (titoloSeminario) {
+      var reasonField = document.getElementById("freason");
+      var msgField = document.getElementById("fmsg");
+      if (reasonField) {
+        Array.prototype.forEach.call(reasonField.options, function (opt) {
+          if (opt.text.trim().toLowerCase() === "seminario") reasonField.value = opt.value || opt.text;
+        });
+      }
+      if (msgField && !msgField.value) {
+        msgField.value = "Seminario: " + titoloSeminario + "\n\n";
+      }
+    }
+
     openModal();
-  }
+  })();
 
   // close on Escape
   document.addEventListener("keydown", function (e) {
