@@ -22,19 +22,116 @@
     .frammenti-archivio-intro p {
       color: var(--ink-soft);
       font-size: 1.05rem;
-    }
-    .frammenti-archivio .frammenti-grid {
-      grid-auto-rows: 220px;
-    }
-    .frammenti-archivio a.frammenti-item {
-      display: block;
-      color: inherit;
-      text-decoration: none;
+      line-height: 1.7;
     }
     .frammenti-empty {
       text-align: center;
       color: var(--ink-soft);
       padding: 3rem 0;
+    }
+
+    /* --- card, stesso linguaggio grafico gia' usato per i Quaderni --- */
+    .frammenti-archivio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.4rem, 2.5vw, 2.2rem);
+      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    }
+    .frammento-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      color: inherit;
+      text-decoration: none;
+      transition: transform .45s ease, box-shadow .45s ease, border-color .45s ease;
+    }
+    .frammento-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 22px 48px -20px rgba(61, 15, 24, .26);
+      border-color: rgba(201, 162, 75, .45);
+    }
+    .frammento-cover {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, rgba(100, 28, 41, .08), rgba(201, 162, 75, .10));
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .frammento-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .55s ease;
+    }
+    .frammento-card:hover .frammento-cover img { transform: scale(1.04); }
+    .frammento-cover-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .frammento-cover-placeholder svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--gold-deep);
+      opacity: .45;
+    }
+    .frammento-card-body {
+      padding: 1.7rem 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: .75rem;
+    }
+    .frammento-card-meta {
+      font-family: var(--ff-body);
+      font-size: .8rem;
+      color: var(--ink-soft);
+      letter-spacing: .02em;
+    }
+    .frammento-card-titolo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      color: var(--bordeaux-900);
+      line-height: 1.3;
+    }
+    .frammento-card-estratto {
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      line-height: 1.72;
+      color: var(--ink-soft);
+      flex-grow: 1;
+    }
+    .frammento-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-family: var(--ff-body);
+      font-weight: 600;
+      font-size: .84rem;
+      letter-spacing: .03em;
+      color: var(--bordeaux-700);
+      border-bottom: 1.5px solid var(--gold-deep);
+      padding-bottom: .2rem;
+      width: fit-content;
+      margin-top: .3rem;
+      transition: color .3s ease, gap .3s ease, border-color .3s ease;
+    }
+    .frammento-card-link svg { width: 14px; height: 14px; stroke: currentColor; transition: transform .3s ease; flex-shrink: 0; }
+    .frammento-card:hover .frammento-card-link { color: var(--brick); border-color: var(--brick); gap: .75rem; }
+    .frammento-card:hover .frammento-card-link svg { transform: translateX(4px); }
+
+    @media (max-width: 900px) {
+      .frammenti-archivio-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .frammenti-archivio-grid { grid-template-columns: 1fr; }
+      .frammento-card-body { padding: 1.4rem 1.5rem 1.7rem; }
     }
   </style>
 </head>
@@ -61,10 +158,10 @@
       <div class="container">
         <div class="frammenti-archivio-intro">
           <span class="eyebrow">Frammenti di Cammino</span>
-          <h1>Archivio completo</h1>
-          <p>Ogni istante custodito lungo il Cammino, raccolto qui nella sua interezza.</p>
+          <h1>Frammenti</h1>
+          <p>Momenti, incontri e immagini che custodiscono il cammino dei Custodi della Sorgente. Ogni frammento racconta un'esperienza vissuta e condivisa.</p>
         </div>
-        <div class="frammenti-grid" id="frammentiArchivioGrid" aria-live="polite">
+        <div class="frammenti-archivio-grid" id="frammentiArchivioGrid" aria-live="polite">
           <div class="frammenti-empty">Caricamento dei Frammenti...</div>
         </div>
       </div>
@@ -89,6 +186,7 @@
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       var escapeHtml = ContentEngine.escapeHtml;
+      var formatDate = ContentEngine.formatDate;
       var resolveSlug = ContentEngine.resolveSlug;
 
       function renderArchivio(items) {
@@ -102,18 +200,29 @@
           return;
         }
 
-        root.innerHTML = visibili.map(function (item, index) {
+        root.innerHTML = visibili.map(function (item) {
           var galleria = Array.isArray(item.galleria) ? item.galleria.filter(Boolean) : [];
           var image = galleria[0] || "";
           var slug = resolveSlug(item, {});
           var href = "frammento.html?slug=" + encodeURIComponent(slug);
-          var content = image
-            ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">'
-            : '<div class="frammenti-placeholder">'
-              + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
-              + '<span>' + escapeHtml(item.titolo || "Frammento") + '</span>'
-              + '</div>';
-          return '<a class="frammenti-item" href="' + escapeHtml(href) + '" data-index="' + index + '">' + content + '</a>';
+          var titolo = item.titolo || "Frammento di Cammino";
+
+          var cover = image
+            ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(titolo) + '">'
+            : '<div class="frammento-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
+
+          var metaParts = [formatDate(item.data, { day: "numeric", month: "long", year: "numeric" }), item.luogo].filter(Boolean);
+          var estratto = item.testo || "";
+
+          return '<a class="frammento-card" href="' + escapeHtml(href) + '">'
+            + '<div class="frammento-cover">' + cover + '</div>'
+            + '<div class="frammento-card-body">'
+            + (metaParts.length ? '<div class="frammento-card-meta">' + escapeHtml(metaParts.join(" · ")) + '</div>' : "")
+            + '<h2 class="frammento-card-titolo">' + escapeHtml(titolo) + '</h2>'
+            + (estratto ? '<p class="frammento-card-estratto">' + escapeHtml(estratto) + '</p>' : "")
+            + '<span class="frammento-card-link">Scopri <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'
+            + '</div>'
+            + '</a>';
         }).join("");
       }
 
