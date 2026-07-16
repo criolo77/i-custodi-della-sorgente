@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quaderni della Sorgente - Custodi della Sorgente</title>
-  <meta name="description" content="L'archivio completo dei Quaderni di Custodi della Sorgente.">
+  <title>Quaderni | Custodi della Sorgente</title>
+  <meta name="description" content="I Quaderni di Custodi della Sorgente: pensieri, riflessioni e percorsi di ricerca interiore.">
+
+  <meta property="og:title" content="Quaderni | Custodi della Sorgente">
+  <meta property="og:description" content="I Quaderni di Custodi della Sorgente: pensieri, riflessioni e percorsi di ricerca interiore.">
+
+  <meta name="twitter:title" content="Quaderni | Custodi della Sorgente">
+  <meta name="twitter:description" content="I Quaderni di Custodi della Sorgente: pensieri, riflessioni e percorsi di ricerca interiore.">
   <link rel="stylesheet" href="style.css">
   <style>
     .quaderni-archivio {
@@ -25,7 +31,8 @@
       line-height: 1.7;
     }
     .quaderni-archivio-back {
-      margin-top: 1.8rem;
+      text-align: center;
+      margin-top: clamp(2.5rem, 5vw, 3.5rem);
     }
     .quaderni-empty {
       text-align: center;
@@ -60,12 +67,12 @@
           <span class="eyebrow">Quaderni della Sorgente</span>
           <h1>Quaderni</h1>
           <p>Pensieri, riflessioni e percorsi che accompagnano il cammino dei Custodi della Sorgente. Ogni Quaderno custodisce un frammento di ricerca, esperienza e consapevolezza.</p>
-          <div class="quaderni-archivio-back">
-            <a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>
-          </div>
         </div>
         <div class="quaderni-grid" id="quaderniArchivioGrid" aria-live="polite">
           <div class="quaderni-empty">Caricamento dei Quaderni...</div>
+        </div>
+        <div class="quaderni-archivio-back">
+          <a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>
         </div>
       </div>
     </section>

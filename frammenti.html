@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frammenti di Cammino - Custodi della Sorgente</title>
-  <meta name="description" content="L'archivio completo dei Frammenti di Cammino di Custodi della Sorgente.">
+  <title>Frammenti di Cammino | Custodi della Sorgente</title>
+  <meta name="description" content="Frammenti di Cammino di Custodi della Sorgente: momenti, incontri e immagini che custodiscono il cammino condiviso.">
+
+  <meta property="og:title" content="Frammenti di Cammino | Custodi della Sorgente">
+  <meta property="og:description" content="Frammenti di Cammino di Custodi della Sorgente: momenti, incontri e immagini che custodiscono il cammino condiviso.">
+
+  <meta name="twitter:title" content="Frammenti di Cammino | Custodi della Sorgente">
+  <meta name="twitter:description" content="Frammenti di Cammino di Custodi della Sorgente: momenti, incontri e immagini che custodiscono il cammino condiviso.">
   <link rel="stylesheet" href="style.css">
   <style>
     .frammenti-archivio {
@@ -25,7 +31,8 @@
       line-height: 1.7;
     }
     .frammenti-archivio-back {
-      margin-top: 1.8rem;
+      text-align: center;
+      margin-top: clamp(2.5rem, 5vw, 3.5rem);
     }
     .frammenti-empty {
       text-align: center;
@@ -163,12 +170,12 @@
           <span class="eyebrow">Frammenti di Cammino</span>
           <h1>Frammenti</h1>
           <p>Momenti, incontri e immagini che custodiscono il cammino dei Custodi della Sorgente. Ogni frammento racconta un'esperienza vissuta e condivisa.</p>
-          <div class="frammenti-archivio-back">
-            <a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>
-          </div>
         </div>
         <div class="frammenti-archivio-grid" id="frammentiArchivioGrid" aria-live="polite">
           <div class="frammenti-empty">Caricamento dei Frammenti...</div>
+        </div>
+        <div class="frammenti-archivio-back">
+          <a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>
         </div>
       </div>
     </section>
