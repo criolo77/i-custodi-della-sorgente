@@ -51,6 +51,10 @@
       text-align: center;
     }
     .frammento-detail-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .8rem;
       margin-top: 2.2rem;
     }
     @media (max-width: 640px) {
@@ -129,14 +133,20 @@
           + '<h1 class="frammento-detail-title">' + escapeHtml(title) + '</h1>'
           + '<p class="frammento-detail-text">' + escapeHtml(item.testo || "") + '</p>'
           + galleryHtml
-          + '<div class="frammento-detail-actions"><a class="btn btn-outline-dark" href="frammenti.html">Torna all\'archivio</a></div>';
+          + '<div class="frammento-detail-actions">'
+          + '<a class="btn btn-outline-dark" href="frammenti.html">&larr; Torna ai Frammenti</a>'
+          + '<a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>'
+          + '</div>';
       }
 
       function renderNotFound(root) {
         root.innerHTML = '<span class="eyebrow">Frammenti di Cammino</span>'
           + '<h1 class="frammento-detail-title">Frammento non trovato</h1>'
           + '<p class="frammento-detail-text">Il frammento richiesto non e presente nei contenuti pubblicati.</p>'
-          + '<div class="frammento-detail-actions"><a class="btn btn-outline-dark" href="frammenti.html">Torna all\'archivio</a></div>';
+          + '<div class="frammento-detail-actions">'
+          + '<a class="btn btn-outline-dark" href="frammenti.html">&larr; Torna ai Frammenti</a>'
+          + '<a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>'
+          + '</div>';
       }
 
       ContentEngine.initDetailPage({
