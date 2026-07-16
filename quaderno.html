@@ -159,7 +159,8 @@
           + '<p class="quaderno-detail-text">' + escapeHtml(text) + '</p>'
           + '<div class="quaderno-detail-actions">'
           + pdf
-          + '<a class="btn btn-outline-dark" href="index.html#quaderni">Torna ai Quaderni</a>'
+          + '<a class="btn btn-outline-dark" href="quaderni.html">&larr; Torna ai Quaderni</a>'
+          + '<a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>'
           + '</div>'
           + '</div>';
       }
@@ -169,13 +170,17 @@
           + '<span class="eyebrow">Quaderni della Sorgente</span>'
           + '<h1 class="quaderno-detail-title">Quaderno non trovato</h1>'
           + '<p class="quaderno-detail-text">Il quaderno richiesto non e presente nei contenuti pubblicati.</p>'
-          + '<div class="quaderno-detail-actions"><a class="btn btn-outline-dark" href="index.html#quaderni">Torna ai Quaderni</a></div>'
+          + '<div class="quaderno-detail-actions">'
+          + '<a class="btn btn-outline-dark" href="quaderni.html">&larr; Torna ai Quaderni</a>'
+          + '<a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>'
+          + '</div>'
           + '</div>';
       }
 
       ContentEngine.initDetailPage({
         dataUrl: "content/quaderni.json",
         rootId: "quadernoDetail",
+        isVisible: function (item) { return item.stato !== "bozza"; },
         render: renderQuaderno,
         renderNotFound: renderNotFound
       });

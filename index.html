@@ -553,14 +553,6 @@
 </div>
 
 <!-- ===== QUADERNI DELLA SORGENTE ===== -->
-<!--
-  CMS NOTE (Decap CMS):
-  Questa sezione mostra gli ultimi 3 quaderni pubblicati.
-  I contenuti sono gestiti tramite file Markdown in /content/quaderni/.
-  Ogni file Markdown ha frontmatter: title, autore, data, estratto, immagine.
-  Il build system (es. Eleventy / Hugo) legge i file e genera questa griglia automaticamente.
-  Per aggiungere un Quaderno: creare un nuovo file .md dal pannello Decap CMS.
--->
 <section class="section" id="quaderni">
   <div class="container">
 
@@ -569,83 +561,8 @@
       <p style="margin-inline:auto;">Pensieri, riflessioni, meditazioni, articoli ed esperienze nate lungo il Cammino. Ogni Quaderno è una condivisione autentica, scritta per nutrire il dialogo tra Corpo, Mente, Anima e Spirito.</p>
     </div>
 
-    <div class="quaderni-grid reveal-stagger" id="quaderniGrid" data-content="quaderni">
-
-      <!-- Quaderno 1 — segnaposto -->
-      <article class="quaderno-card">
-        <div class="quaderno-cover">
-          <div class="quaderno-cover-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="quaderno-body">
-          <div class="quaderno-meta">
-            <span class="quaderno-autore">Custodi della Sorgente</span>
-            <span class="quaderno-sep" aria-hidden="true">·</span>
-            <time class="quaderno-data">Luglio 2025</time>
-          </div>
-          <h3 class="quaderno-titolo">Il Silenzio come pratica quotidiana</h3>
-          <p class="quaderno-estratto">Il silenzio non è assenza di suono, ma presenza a sé stessi. In questo Quaderno esploriamo come coltivare uno spazio interiore di ascolto, anche nei ritmi frenetici della vita moderna.</p>
-          <a href="quaderni.html" class="quaderno-link">
-            Leggi il Quaderno
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- Quaderno 2 — segnaposto -->
-      <article class="quaderno-card">
-        <div class="quaderno-cover">
-          <div class="quaderno-cover-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="quaderno-body">
-          <div class="quaderno-meta">
-            <span class="quaderno-autore">Maria Gorette</span>
-            <span class="quaderno-sep" aria-hidden="true">·</span>
-            <time class="quaderno-data">Agosto 2025</time>
-          </div>
-          <h3 class="quaderno-titolo">Il tamburo e la memoria della Terra</h3>
-          <p class="quaderno-estratto">Ogni battito del tamburo è una preghiera che riporta al cuore di Madre Terra. Una riflessione sul ritmo come linguaggio ancestrale e sulla guarigione che nasce dall'ascolto profondo della Natura.</p>
-          <a href="quaderni.html" class="quaderno-link">
-            Leggi il Quaderno
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- Quaderno 3 — segnaposto -->
-      <article class="quaderno-card">
-        <div class="quaderno-cover">
-          <div class="quaderno-cover-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="quaderno-body">
-          <div class="quaderno-meta">
-            <span class="quaderno-autore">Paolo Crippa</span>
-            <span class="quaderno-sep" aria-hidden="true">·</span>
-            <time class="quaderno-data">Settembre 2025</time>
-          </div>
-          <h3 class="quaderno-titolo">Curare e accompagnare: riflessioni dal confine</h3>
-          <p class="quaderno-estratto">Quindici anni accanto a chi si avvicina alla soglia mi hanno insegnato che la cura più profonda non è tecnica, ma presenza. Un viaggio tra Cure Palliative, Sciamanesimo e la sacralità di ogni incontro.</p>
-          <a href="quaderni.html" class="quaderno-link">
-            Leggi il Quaderno
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
+    <div class="quaderni-slider reveal-stagger" id="quaderniGrid" data-content="quaderni">
+      <div class="quaderni-slider-empty">Caricamento dei Quaderni...</div>
     </div>
 
     <div class="quaderni-cta reveal">

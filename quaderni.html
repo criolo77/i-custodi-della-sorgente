@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quaderni della Sorgente - Custodi della Sorgente</title>
+  <meta name="description" content="L'archivio completo dei Quaderni di Custodi della Sorgente.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .quaderni-archivio {
+      background: var(--white);
+      padding-top: 8rem;
+    }
+    .quaderni-archivio-intro {
+      max-width: 640px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+    .quaderni-archivio-intro h1 {
+      margin: .6rem 0 .8rem;
+    }
+    .quaderni-archivio-intro p {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .quaderni-archivio-back {
+      margin-top: 1.8rem;
+    }
+    .quaderni-empty {
+      text-align: center;
+      color: var(--ink-soft);
+      padding: 3rem 0;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header scrolled">
+    <div class="container nav">
+      <a href="index.html#top" class="brand">
+        <span class="brand-mark brand-mark-logo">
+          <img src="images/logo-sorgente.png" alt="Logo Custodi della Sorgente" class="brand-logo-img">
+        </span>
+        Custodi <em>della Sorgente</em>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigazione principale">
+        <a href="index.html#eventi">Seminari</a>
+        <a href="index.html#frammenti">Frammenti</a>
+        <a href="index.html#quaderni">Quaderni</a>
+        <a href="index.html#testimonianze">Le Voci</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section quaderni-archivio">
+      <div class="container">
+        <div class="quaderni-archivio-intro">
+          <span class="eyebrow">Quaderni della Sorgente</span>
+          <h1>Quaderni</h1>
+          <p>Pensieri, riflessioni e percorsi che accompagnano il cammino dei Custodi della Sorgente. Ogni Quaderno custodisce un frammento di ricerca, esperienza e consapevolezza.</p>
+          <div class="quaderni-archivio-back">
+            <a class="btn btn-outline-dark" href="index.html#top">&larr; Torna alla Home</a>
+          </div>
+        </div>
+        <div class="quaderni-grid" id="quaderniArchivioGrid" aria-live="polite">
+          <div class="quaderni-empty">Caricamento dei Quaderni...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Realizzato con cura, respiro dopo respiro.</span>
+        <span>© <span id="year"></span> Custodi della Sorgente.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="content-engine.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      var escapeHtml = ContentEngine.escapeHtml;
+      var formatDate = ContentEngine.formatDate;
+      var resolveSlug = ContentEngine.resolveSlug;
+
+      function renderArchivio(items) {
+        var root = document.getElementById("quaderniArchivioGrid");
+        if (!root) return;
+
+        var visibili = items
+          .filter(function (item) { return item && item.titolo && item.stato !== "bozza"; })
+          .slice()
+          .sort(function (a, b) {
+            var dataA = a.data ? new Date(a.data + "T00:00:00").getTime() : -Infinity;
+            var dataB = b.data ? new Date(b.data + "T00:00:00").getTime() : -Infinity;
+            return dataB - dataA;
+          });
+
+        if (!visibili.length) {
+          root.innerHTML = '<div class="quaderni-empty">Nessun Quaderno pubblicato al momento.</div>';
+          return;
+        }
+
+        root.innerHTML = visibili.map(function (item) {
+          var slug = resolveSlug(item, {});
+          var href = "quaderno.html?slug=" + encodeURIComponent(slug);
+          var cover = item.copertina
+            ? '<img src="' + escapeHtml(item.copertina) + '" alt="' + escapeHtml(item.titolo || "Quaderno") + '">'
+            : '<div class="quaderno-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
+
+          return '<article class="quaderno-card">'
+            + '<div class="quaderno-cover">' + cover + '</div>'
+            + '<div class="quaderno-body">'
+            + '<div class="quaderno-meta"><span class="quaderno-autore">' + escapeHtml(item.autore || "Custodi della Sorgente") + '</span><span class="quaderno-sep" aria-hidden="true">·</span><time class="quaderno-data">' + escapeHtml(formatDate(item.data, { month: "long", year: "numeric" })) + '</time></div>'
+            + '<h3 class="quaderno-titolo">' + escapeHtml(item.titolo) + '</h3>'
+            + '<p class="quaderno-estratto">' + escapeHtml(item.estratto || item.descrizione || "") + '</p>'
+            + '<a href="' + escapeHtml(href) + '" class="quaderno-link">Leggi il Quaderno <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>'
+            + '</div>'
+            + '</article>';
+        }).join("");
+      }
+
+      fetch("content/quaderni.json", { cache: "no-store" })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Impossibile caricare i quaderni");
+          return response.json();
+        })
+        .then(renderArchivio)
+        .catch(function () {
+          var root = document.getElementById("quaderniArchivioGrid");
+          if (root) root.innerHTML = '<div class="quaderni-empty">Non è stato possibile caricare i Quaderni in questo momento.</div>';
+        });
+    })();
+  </script>
+</body>
+</html>

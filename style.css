@@ -1749,6 +1749,92 @@ body.modal-open {
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 
+/* ============================================================
+   QUADERNI — slider orizzontale di copertine (Home)
+   Identita' grafica propria: copertine verticali "a libro",
+   scorrimento orizzontale, distinta dalla griglia dell'archivio.
+   ============================================================ */
+.quaderni-slider {
+  display: flex;
+  gap: 1.4rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: .5rem .25rem 1.5rem;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+.quaderni-slider::-webkit-scrollbar { height: 6px; }
+.quaderni-slider::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }
+.quaderni-slider::-webkit-scrollbar-track { background: transparent; }
+
+.quaderni-slider-empty {
+  color: var(--ink-soft);
+  padding: 2rem 1rem;
+}
+
+.quaderno-slide {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: clamp(160px, 22vw, 210px);
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+.quaderno-slide-cover {
+  aspect-ratio: 3 / 4;
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--bordeaux-700), var(--bordeaux-900));
+  box-shadow: 0 14px 30px -14px rgba(61, 15, 24, .35);
+  transition: transform .4s ease, box-shadow .4s ease;
+  position: relative;
+}
+.quaderno-slide:hover .quaderno-slide-cover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 42px -16px rgba(61, 15, 24, .45);
+}
+.quaderno-slide-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.quaderno-slide:hover .quaderno-slide-cover img { transform: scale(1.05); }
+.quaderno-slide-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quaderno-slide-cover-placeholder svg {
+  width: 34px;
+  height: 34px;
+  stroke: var(--gold-soft);
+  opacity: .7;
+}
+.quaderno-slide-titolo {
+  font-family: var(--ff-display);
+  font-size: .95rem;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-top: .75rem;
+}
+.quaderno-slide-meta {
+  font-family: var(--ff-body);
+  font-size: .74rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-top: .3rem;
+}
+@media (max-width: 560px) {
+  .quaderno-slide { width: clamp(130px, 40vw, 170px); }
+}
+
 /* --- responsive --- */
 @media (max-width: 900px) {
   .quaderni-grid { grid-template-columns: repeat(2, 1fr); }

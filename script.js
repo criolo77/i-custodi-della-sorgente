@@ -232,24 +232,33 @@
 
   function renderQuaderni(items) {
     var root = document.getElementById("quaderniGrid");
-    if (!root || !Array.isArray(items) || !items.length) return;
+    if (!root || !Array.isArray(items)) return;
 
-    root.innerHTML = items.slice(0, 3).map(function (item) {
-      var slug = item.slug || "";
+    var visibili = items
+      .filter(function (item) { return item && item.titolo && item.stato !== "bozza"; })
+      .slice()
+      .sort(function (a, b) {
+        var dataA = a.data ? new Date(a.data + "T00:00:00").getTime() : -Infinity;
+        var dataB = b.data ? new Date(b.data + "T00:00:00").getTime() : -Infinity;
+        return dataB - dataA; // dal piu' recente al piu' vecchio
+      });
+
+    if (!visibili.length) return;
+
+    root.innerHTML = visibili.slice(0, 10).map(function (item) {
+      var slug = (window.ContentEngine && window.ContentEngine.resolveSlug)
+        ? window.ContentEngine.resolveSlug(item, {})
+        : (item.slug || "");
       var href = slug ? "quaderno.html?slug=" + encodeURIComponent(slug) : "quaderno.html";
       var cover = item.copertina
         ? '<img src="' + escapeHtml(item.copertina) + '" alt="' + escapeHtml(item.titolo || "Quaderno") + '">'
-        : '<div class="quaderno-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
+        : '<div class="quaderno-slide-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
 
-      return '<article class="quaderno-card">'
-        + '<div class="quaderno-cover">' + cover + '</div>'
-        + '<div class="quaderno-body">'
-        + '<div class="quaderno-meta"><span class="quaderno-autore">' + escapeHtml(item.autore || "Custodi della Sorgente") + '</span><span class="quaderno-sep" aria-hidden="true">·</span><time class="quaderno-data">' + escapeHtml(formatDate(item.data, { month: "long", year: "numeric" })) + '</time></div>'
-        + '<h3 class="quaderno-titolo">' + escapeHtml(item.titolo) + '</h3>'
-        + '<p class="quaderno-estratto">' + escapeHtml(item.estratto || item.descrizione || "") + '</p>'
-        + '<a href="' + escapeHtml(href) + '" class="quaderno-link">Leggi il Quaderno <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>'
-        + '</div>'
-        + '</article>';
+      return '<a class="quaderno-slide" href="' + escapeHtml(href) + '">'
+        + '<div class="quaderno-slide-cover">' + cover + '</div>'
+        + '<div class="quaderno-slide-titolo">' + escapeHtml(item.titolo) + '</div>'
+        + '<div class="quaderno-slide-meta">' + escapeHtml(formatDate(item.data, { month: "long", year: "numeric" })) + '</div>'
+        + '</a>';
     }).join("");
   }
 
