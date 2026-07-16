@@ -1187,7 +1187,7 @@ footer {
   font-weight: 400;
   font-size: clamp(1.2rem, 2.4vw, 1.7rem);
   line-height: 1.7;
-  color: var(--bordeaux-700);
+  color: var(--gold-deep);
   letter-spacing: .01em;
 }
 
