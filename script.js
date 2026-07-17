@@ -452,6 +452,7 @@
     var framNext     = document.getElementById('frammentilightboxNext');
     var framItemIndex  = 0; // quale Frammento e' aperto
     var framImageIndex = 0; // quale immagine, all'interno della sua galleria
+    var framSavedScrollY = 0;
 
     if (!framItems.length || !framLightbox) return;
 
@@ -469,6 +470,8 @@
     framItemIndex = (itemIdx + framItems.length) % framItems.length;
     framImageIndex = imageIdx || 0;
     framRender();
+    framSavedScrollY = window.scrollY;
+    document.body.style.top = "-" + framSavedScrollY + "px";
     framLightbox.hidden = false;
     document.body.classList.add('modal-open');
     if (framClose) framClose.focus();
@@ -486,6 +489,8 @@
     if (!framLightbox) return;
     framLightbox.hidden = true;
     document.body.classList.remove('modal-open');
+    document.body.style.top = "";
+    window.scrollTo({ top: framSavedScrollY, behavior: "instant" });
   }
 
   function framRender() {
