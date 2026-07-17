@@ -834,6 +834,12 @@ h1, h2, h3, h4 {
   box-shadow: 0 1px 3px rgba(42, 26, 28, .08);
   margin-bottom: .85rem;
 }
+.status-badge.is-aperto {
+  border-color: var(--gold);
+  color: var(--bordeaux-900);
+  background: var(--gold-soft);
+  box-shadow: 0 1px 3px rgba(42, 26, 28, .08), 0 0 8px rgba(201, 162, 75, .35);
+}
 .status-badge.is-prossimamente {
   border-color: rgba(110, 134, 163, .55);
   color: #3E5266;
