@@ -416,6 +416,15 @@
       }
     }
 
+    // Se l'URL include un'ancora (es. #eventi), la pagina deve trovarsi già
+    // in quella posizione PRIMA di aprire il popup: openModal() blocca lo
+    // scroll (position:fixed) salvando la posizione attuale, quindi deve
+    // catturare quella corretta e non la cima della pagina.
+    if (window.location.hash) {
+      var targetSection = document.querySelector(window.location.hash);
+      if (targetSection) targetSection.scrollIntoView({ behavior: "instant", block: "start" });
+    }
+
     openModal();
   })();
 
