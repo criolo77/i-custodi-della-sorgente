@@ -1439,6 +1439,30 @@ body.modal-open {
   border: 1px solid var(--line);
   background: var(--cream);
   transition: transform .45s ease, box-shadow .45s ease;
+  display: flex;
+  flex-direction: column;
+}
+.frammenti-item-cover {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+.frammenti-item-caption {
+  flex-shrink: 0;
+  padding: .5rem .8rem;
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+}
+.frammenti-item-caption span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: .82rem;
+  line-height: 1.35;
+  color: var(--ink);
 }
 .frammenti-item:hover {
   transform: translateY(-6px) scale(1.01);

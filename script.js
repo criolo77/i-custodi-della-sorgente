@@ -219,14 +219,19 @@
       var galleria = Array.isArray(item.galleria) ? item.galleria.filter(Boolean) : [];
       var image = galleria[0] || "";
       var layout = layoutClasses[index % layoutClasses.length];
-      var content = image
-        ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">'
-        : '<div class="frammenti-placeholder">'
+      var content, caption;
+      if (image) {
+        content = '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.titolo || "Frammento di Cammino") + '">';
+        caption = '<div class="frammenti-item-caption"><span>' + escapeHtml(item.titolo || "Frammento di Cammino") + '</span></div>';
+      } else {
+        content = '<div class="frammenti-placeholder">'
           + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
           + '<span>' + escapeHtml(item.titolo || "Frammento") + '</span>'
           + '</div>';
+        caption = "";
+      }
       var galleriaAttr = escapeHtml(JSON.stringify(galleria));
-      return '<div class="frammenti-item ' + layout + '" data-index="' + index + '" data-titolo="' + escapeHtml(item.titolo || "") + '" data-gallery="' + galleriaAttr + '">' + content + '</div>';
+      return '<div class="frammenti-item ' + layout + '" data-index="' + index + '" data-titolo="' + escapeHtml(item.titolo || "") + '" data-gallery="' + galleriaAttr + '"><div class="frammenti-item-cover">' + content + '</div>' + caption + '</div>';
     }).join("");
   }
 
