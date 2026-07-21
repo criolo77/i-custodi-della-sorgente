@@ -124,7 +124,8 @@ content:
       - name: slug
         label: Slug
         type: string
-        required: true
+        required: false
+        description: "Identificativo usato nell'indirizzo della pagina del quaderno (es. quaderno.html?slug=nome-quaderno). Puoi lasciarlo vuoto: viene generato automaticamente dal Titolo. Compilalo solo se vuoi un indirizzo diverso da quello proposto automaticamente (solo lettere minuscole, numeri e trattini, senza spazi né accenti)."
       - name: autore
         label: Autore
         type: string
@@ -161,5 +162,4 @@ content:
       - name: metaDescription
         label: Meta Description
         type: text
-
 
