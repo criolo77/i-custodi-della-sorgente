@@ -2,6 +2,62 @@
    Custodi della Sorgente — style.css
    ============================================================ */
 
+/* ---------- FONT FACES (locali, self-hosted) ---------- */
+/* Sostituiscono il precedente caricamento da Google Fonts.
+   Pesi e stili inclusi: esattamente quelli realmente usati nel sito. */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-roman-400-500-variable.woff2') format('woff2-variations'),
+       url('fonts/fraunces-roman-400-500-variable.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-italic-400-500-variable.woff2') format('woff2-variations'),
+       url('fonts/fraunces-italic-400-500-variable.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('fonts/outfit-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('fonts/outfit-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('fonts/outfit-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/inter-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('fonts/playfairdisplay-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- DESIGN TOKENS ---------- */
 :root {
   --bordeaux-900: #3D0F18;
@@ -324,13 +380,14 @@ h1, h2, h3, h4 {
 .hero-content .eyebrow { margin-bottom: 1.4rem; }
 .hero-content h1 {
   font-size: clamp(2.4rem, 6.4vw, 4.9rem);
+  line-height: 1.22;
   color: var(--white);
   max-width: 22ch;
   opacity: 0;
   transform: translateY(28px);
   animation: riseIn 1s ease .25s forwards;
 }
-.hero-content h1 em { font-style: italic; color: var(--gold-soft); font-weight: 400; }
+.hero-content h1 em { font-style: italic; color: var(--gold-soft); font-weight: 400; font-size: 0.935em; }
 .hero-sub {
   margin-top: 1.4rem;
   font-size: clamp(1rem, 1.6vw, 1.2rem);
