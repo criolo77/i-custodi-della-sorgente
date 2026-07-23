@@ -2042,9 +2042,9 @@ body.modal-open {
   border-radius: 2px;
   font-family: var(--ff-body);
   font-weight: 600;
-  font-size: .78rem;
-  letter-spacing: .03em;
-  padding: .55rem 1.2rem;
+  font-size: .92rem;
+  letter-spacing: .02em;
+  padding: .95rem 1.9rem;
   cursor: pointer;
   text-decoration: none;
   transition: background .35s ease, transform .35s ease, box-shadow .35s ease;
